@@ -1,0 +1,20 @@
+.navbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 100px; /* Add padding to prevent nav items from overlapping the brand */
+}
+
+.navbar-brand {
+    background-color: #343a40; /* Darker background */
+    color: white; /* White text for contrast */
+    width: 100px; /* Fixed width to make it square */
+    height: 100%; /* Ensure it spans the full height of the navbar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute; /* Keeps it to the left but still in flow */
+    left: 0;
+    top: 0;
+    bottom: 0;
+}

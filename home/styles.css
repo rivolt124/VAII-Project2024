@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center; /* Horizontally center the content */
+    align-items: center; /* Vertically center the content */
+    background-image: url('../img/flight.jpg'); /* Background image */
+    background-size: cover; /* Ensure it covers the whole viewport */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+}
+
+.center-column {
+    width: 80%; /* You can adjust the width */
+    max-width: 1200px; /* Max width for larger screens */
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Shadow for a nice effect */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.navbar-brand {
+    border-radius: 0.2rem;
+    padding: 0.5rem 1rem;
+}
+
+.navbar-brand:hover {
+    background-color: #333; /* Dark grey background */
+    color: white; /* Optional: Change text color to white */
+}
+
