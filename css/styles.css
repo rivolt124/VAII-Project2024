@@ -1,0 +1,83 @@
+body {
+    overflow-x: hidden;
+}
+
+.index-selection.home {
+    background-image: url('../img/flight.jpg');
+}
+
+.index-selection.about {
+    background-image: url('../img/airport.jpg');
+}
+
+.index-selection.contact {
+    background-image: url('../img/runway.jpg');
+}
+
+.index-selection {
+    height: 100vh;
+    width: 100vw;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    flex-grow: 1;
+}
+
+.index-selection::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.index-selection .container {
+    position: relative;
+    z-index: 2;
+}
+
+.index-selection h1 {
+    color: white;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: black;
+}
+
+.navbar-brand:hover,
+.navbar-nav .nav-link:hover,
+a:hover {
+    color: #d9534f;
+}
+
+.navbar-nav .nav-link {
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.btn-outline-danger {
+    border-color: #d9534f;
+    color: white;
+}
+
+#about-us {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background-color: transparent;
+}
+
+.footer p {
+    margin: 0;
+}
