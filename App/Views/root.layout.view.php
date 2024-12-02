@@ -20,7 +20,7 @@
 <body>
 <nav class="navbar navbar-expand-sm bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="<?= $link->url("home.index") ?>">
+        <a class="navbar-brand" href="public/html/index.html">
             <img src="public/images/vaiicko_logo.png" title="<?= \App\Config\Configuration::APP_NAME ?>"
                  title="<?= \App\Config\Configuration::APP_NAME ?>">
         </a>
