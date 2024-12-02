@@ -3,15 +3,15 @@ body {
 }
 
 .index-selection.home {
-    background-image: url('../img/flight.jpg');
+    background-image: url('../images/flight.jpg');
 }
 
 .index-selection.about {
-    background-image: url('../img/airport.jpg');
+    background-image: url('../images/airport.jpg');
 }
 
 .index-selection.contact {
-    background-image: url('../img/runway.jpg');
+    background-image: url('../images/runway.jpg');
 }
 
 .index-selection {
