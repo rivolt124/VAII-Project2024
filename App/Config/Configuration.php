@@ -15,16 +15,16 @@ class Configuration
     /**
      * App name
      */
-    public const APP_NAME = 'Vaííčko MVC FW';
+    public const APP_NAME = 'Flight Tracker';
     public const FW_VERSION = '2.2';
 
     /**
      * DB settings
      */
     public const DB_HOST = 'db';  // see docker/docker-compose.yml
-    public const DB_NAME = 'vaiicko_db'; // see docker/.env
-    public const DB_USER = 'vaiicko_user'; // see docker/.env
-    public const DB_PASS = 'dtb456'; // see docker/.env
+    public const DB_NAME = 'flights'; // see docker/.env
+    public const DB_USER = 'vymazal'; // see docker/.env
+    public const DB_PASS = 'password'; // see docker/.env
 
     /**
      * URL where main page logging is. If action needs login, user will be redirected to this url

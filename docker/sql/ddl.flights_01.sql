@@ -1,4 +1,4 @@
-SET NAMES utf8mb4;
+SET NAMES utf8;
 SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
@@ -16,6 +16,6 @@ CREATE TABLE `flights`
   DEFAULT CHARSET = utf8mb4;
 
 INSERT INTO `flights` (`flight_number`, `origin`, `destination`)
-VALUES (LS497, 'LEEDS', 'VIENNA'),
-       (OS373, 'VIENNA', 'AMSTERDAM'),
-       (TK1723, 'ISTANBUL', 'BERLIN');
+VALUES ('LS497', 'LEEDS', 'VIENNA'),
+       ('OS373', 'VIENNA', 'AMSTERDAM'),
+       ('TK1723', 'ISTANBUL', 'BERLIN');
