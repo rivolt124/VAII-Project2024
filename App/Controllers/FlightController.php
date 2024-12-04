@@ -8,6 +8,7 @@ use App\Models\Flight;
 use App\Core\HTTPException;
 use App\Helpers\FileStorage;
 use App\Core\Responses\RedirectResponse;
+use App\Models\Post;
 
 class FlightController extends AControllerBase
 {
@@ -23,7 +24,6 @@ class FlightController extends AControllerBase
             ]
         );
     }
-
     public function add(): Response
     {
         return $this->html();
@@ -32,45 +32,45 @@ class FlightController extends AControllerBase
     public function save()
     {
         $id = (int)$this->request()->getValue('id');
-        $oldFlightNumber = "";
-
-        // Check if we are updating an existing flight or adding a new one
-        if ($id > 0) {
-            $flight = Flight::getOne($id);
-            $oldFlightNumber = $flight->getFlightNumber();
-        } else {
-            $flight = new Flight();
-        }
-
-        // Set the properties of the flight model from the form data
-        $flight->setFlightNumber($this->request()->getValue('flight_number')); // Ensure correct form input name
-        $flight->setOrigin($this->request()->getValue('origin')); // Ensure correct form input name
-        $flight->setDestination($this->request()->getValue('destination')); // Ensure correct form input name
-
-        // Validate the form fields
         $formErrors = $this->formErrors();
         if (count($formErrors) > 0) {
             return $this->html(
                 [
-                    'flight' => $flight,
+                    'flight' => null, // No specific flight on errors
                     'errors' => $formErrors
                 ], ($id > 0) ? 'edit' : 'add'
             );
-        } else {
-            // If updating, delete the old file if it exists
-            if ($oldFlightNumber != "") {
-                FileStorage::deleteFile($oldFlightNumber);
-            }
+        }
+        try
+        {
+            if ($id > 0)
+                $flight = Flight::getOne($id);
+            else
+                $flight = new Flight();
 
-            // Save the flight data
+            // Set flight properties from the request
+            $flight->setFlightNumber($this->request()->getValue('flight_number'));
+            $flight->setOrigin($this->request()->getValue('origin'));
+            $destination = $this->request()->getValue('destination');
+            $flight->setDestination($destination ?: "N/A");
+
             $flight->save();
 
-            // Redirect to the flight listing page
             return new RedirectResponse($this->url("flight.index"));
         }
+        catch (\PDOException $e) {
+
+            error_log($e->getMessage());
+            $formErrors[] = "Something went wrong while saving the flight. Please try again.";
+
+            return $this->html(
+                [
+                    'flight' => $flight ?? null,
+                    'errors' => $formErrors
+                ], ($id > 0) ? 'edit' : 'add'
+            );
+        }
     }
-
-
 
     public function edit(): Response
     {
@@ -105,19 +105,25 @@ class FlightController extends AControllerBase
     {
         $errors = [];
 
-        // Validate flight_number
         if ($this->request()->getValue('flight_number') == "") {
             $errors[] = "Pole Číslo letu musí byť vyplnené!";
         } elseif (!preg_match("/^[A-Z0-9]+$/", $this->request()->getValue('flight_number'))) {
-            // Flight number can only contain uppercase letters and numbers (as per the typical format)
-            $errors[] = "Číslo letu musí obsahovať iba písmená a čísla!";
+            $errors[] = "Číslo letu musí obsahovať iba veľké písmená a čísla!";
+        } elseif (strlen($this->request()->getValue('flight_number')) > 6) {
+            $errors[] = "Číslo letu môže mať maximálne 6 znakov!";
         }
+
 
         // Validate origin
         if ($this->request()->getValue('origin') == "") {
-            $errors[] = "Pole Pôvod musí byť vyplnené!";
+            $errors[] = "Origin musí byť zadefinovaný!";
+        } elseif (!preg_match("/^[A-Z]+$/", $this->request()->getValue('origin'))) {
+            $errors[] = "Origin môže pozostávať len z veľ'kych písmen";
         }
 
+        if (!preg_match("/^[A-Z]+$/", $this->request()->getValue('destination')) && $this->request()->getValue('destination') != "") {
+            $errors[] = "Destination môže pozostávať len z veľ'kych písmen";
+        }
         return $errors;
     }
 

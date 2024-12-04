@@ -27,6 +27,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
+                <?php if ($auth->isLogged()): ?>
+                    <li class="nav-item"><a class="nav-link" href="<?= $link->url("flight.index") ?>">Manage Flights</a></li>
+                <?php endif; ?>
                 <li class="nav-item"><a class="nav-link" href="<?= $link->url("home.index") ?>">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?= $link->url("home.about") ?>">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?= $link->url("home.contact") ?>">Contact</a></li>
