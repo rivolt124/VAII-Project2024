@@ -9,19 +9,20 @@
 
     <input type="hidden" name="id" value="<?= @$data['flight']?->getId() ?>">
 
-    <label for="post-text" class="form-label">Flight Number</label>
+    <label for="flight_number" class="form-label">Flight Number</label>
     <div class="input-group has-validation mb-3 ">
-        <textarea class="form-control" aria-label="With textarea" name="flight_number" id="post-text"><?= @$data['flight']?->getFlightNumber() ?></textarea>
+        <input type="text" class="form-control" name="flight_number" id="flight_number" value="<?= @$data['flight']?->getFlightNumber() ?>" required>
     </div>
-    <label for="post-text" class="form-label">Origin</label>
+    <label for="origin" class="form-label">Origin</label>
     <div class="input-group has-validation mb-3 ">
-        <textarea class="form-control" aria-label="With textarea" name="origin" id="post-text"><?= @$data['flight']?->getOrigin() ?></textarea>
+        <input type="text" class="form-control" name="origin" id="origin" value="<?= @$data['flight']?->getOrigin() ?>" required>
     </div>
-    <label for="post-text" class="form-label">Destinatio</label>
+    <label for="destination" class="form-label">Destination</label>
     <div class="input-group has-validation mb-3 ">
         <textarea class="form-control" aria-label="With textarea" name="destination" id="post-text"><?= @$data['flight']?->getDestination() ?></textarea>
     </div>
 
 
     <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-secondary" onclick="location.href='<?= $link->url("flight.index") ?>'">Return</button>
 </form>
