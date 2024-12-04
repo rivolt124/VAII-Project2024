@@ -36,7 +36,7 @@
         <?php endif; ?>
         <?php if ($auth->isLogged()): ?>
             <a href="<?= $link->url("auth.logout") ?>" class="btn btn-outline-danger mt-2">Logout</a>
-            <a href="<?= $link->url("admin.index") ?>" class="btn btn-outline-danger mt-2" >Manage Database</a>
+            <a href="<?= $link->url("flight.index") ?>" class="btn btn-outline-danger mt-2" >Manage Flights</a>
         <?php endif; ?>
     </div>
 </section>

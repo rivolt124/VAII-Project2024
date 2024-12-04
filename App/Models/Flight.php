@@ -7,9 +7,20 @@ use App\Core\Model;
 class Flight extends Model
 {
 
-    protected ?string $flight_number = null;
+    protected ?int $id = null;
+    protected ?string $flight_number;
     protected ?string $origin;
     protected ?string $destination;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function setId(?int $id): void
+    {
+        $this->id = $id;
+    }
 
     public function getFlightNumber(): ?string
     {

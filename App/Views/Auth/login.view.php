@@ -6,18 +6,20 @@ $layout = 'auth';
 ?>
 
 <style>
-    /* General body styling */
     body {
-        overflow: hidden;
         margin: 0;
         padding: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #ff8a00, #e52e71);
+        overflow: hidden;
+        height: 100vh;
     }
 
     .card-signin {
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         border: none;
-        background-color: rgba(255, 255, 255, 0.8); /* Slight transparency */
+        background-color: rgba(255, 255, 255, 0.8);
         padding: 30px;
         max-width: 400px;
         width: 100%;
@@ -33,16 +35,15 @@ $layout = 'auth';
         margin-bottom: 1.5rem;
     }
 
-    /* Ensure proper input styling */
     .form-control {
         border-radius: 5px;
         border: 1px solid #ddd;
         font-size: 1.1rem;
         padding: 10px;
         height: 45px;
-        width: 100%; /* Ensure full width */
+        width: 100%;
         box-sizing: border-box;
-        white-space: nowrap; /* Prevent word wrapping */
+        white-space: nowrap;
     }
 
     .form-control:focus {
@@ -51,7 +52,6 @@ $layout = 'auth';
         outline: none;
     }
 
-    /* Submit button style */
     .btn-primary {
         background-color: #feb47b;
         border: none;
@@ -67,18 +67,15 @@ $layout = 'auth';
         background-color: #ff7e5f;
     }
 
-    /* Error message style */
     .text-danger {
         font-size: 1.1rem;
         font-weight: bold;
     }
 
-    /* Prevent input text from stacking */
     .form-signin input {
         word-wrap: normal;
     }
 
-    /* Responsive design */
     @media (max-width: 768px) {
         .card-signin {
             padding: 20px;
@@ -93,7 +90,7 @@ $layout = 'auth';
         position: absolute;
         bottom: 0;
         width: 100%;
-        height: 50px; /* Fixed height */
+        height: 50px;
         background-color: #343a40;
         color: white;
         display: flex;
@@ -104,6 +101,7 @@ $layout = 'auth';
     .footer p {
         margin: 0;
     }
+    /* generovane pomocou AI */
 </style>
 
 

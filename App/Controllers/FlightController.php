@@ -5,6 +5,9 @@ namespace App\Controllers;
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
 use App\Models\Flight;
+use App\Core\HTTPException;
+use App\Helpers\FileStorage;
+use App\Core\Responses\RedirectResponse;
 
 class FlightController extends AControllerBase
 {
@@ -21,37 +24,102 @@ class FlightController extends AControllerBase
         );
     }
 
-    public function create()
+    public function add(): Response
     {
-        if ($this->request()->getMethod() === 'POST') {
-            $data = $this->request()->getPost();
-            $this->db()->query("INSERT INTO flights (flight_number, origin, destination) VALUES (?, ?, ?)", [
-                $data['flight_number'], $data['origin'], $data['destination']
-            ]);
-            $this->redirect('flights');
-        }
         return $this->html();
     }
 
-    public function edit()
+    public function save()
     {
-        $flight_number = $this->request()->getParam('flight_number');
-        $flight = $this->db()->fetch("SELECT * FROM flights WHERE flight_number = ?", [$flight_number]);
+        $id = (int)$this->request()->getValue('id');
+        $oldFlightNumber = "";
 
-        if ($this->request()->getMethod() === 'POST') {
-            $data = $this->request()->getPost();
-            $this->db()->query("UPDATE flights SET origin = ?, destination = ? WHERE flight_number = ?", [
-                $data['origin'], $data['destination'], $flight_number
-            ]);
-            $this->redirect('flights');
+        // Check if we are updating an existing flight or adding a new one
+        if ($id > 0) {
+            $flight = Flight::getOne($id);
+            $oldFlightNumber = $flight->getFlightNumber();
+        } else {
+            $flight = new Flight();
         }
-        return $this->html(['flight' => $flight]);
+
+        // Set the properties of the flight model from the form data
+        $flight->setFlightNumber($this->request()->getValue('flight_number')); // Ensure correct form input name
+        $flight->setOrigin($this->request()->getValue('origin')); // Ensure correct form input name
+        $flight->setDestination($this->request()->getValue('destination')); // Ensure correct form input name
+
+        // Validate the form fields
+        $formErrors = $this->formErrors();
+        if (count($formErrors) > 0) {
+            return $this->html(
+                [
+                    'flight' => $flight,
+                    'errors' => $formErrors
+                ], ($id > 0) ? 'edit' : 'add'
+            );
+        } else {
+            // If updating, delete the old file if it exists
+            if ($oldFlightNumber != "") {
+                FileStorage::deleteFile($oldFlightNumber);
+            }
+
+            // Save the flight data
+            $flight->save();
+
+            // Redirect to the flight listing page
+            return new RedirectResponse($this->url("flight.index"));
+        }
+    }
+
+
+
+    public function edit(): Response
+    {
+        $id = (int) $this->request()->getValue('id');
+        $flight = Flight::getOne($id);
+
+        if (is_null($flight)) {
+            throw new HTTPException(404);
+        }
+
+        return $this->html(
+            [
+                'flight' => $flight
+            ]
+        );
     }
     public function delete()
     {
-        $flight_number = $this->request()->getParam('flight_number');
-        $this->db()->query("DELETE FROM flights WHERE flight_number = ?", [$flight_number]);
-        $this->redirect('flights');
+        $id = (int) $this->request()->getValue('id');
+        $flight = Flight::getOne($id);
+
+        if (is_null($flight)) {
+            throw new HTTPException(404);
+        } else {
+            FileStorage::deleteFile($flight->getFlightNumber());
+            $flight->delete();
+            return new RedirectResponse($this->url("flight.index"));
+        }
     }
+
+    private function formErrors(): array
+    {
+        $errors = [];
+
+        // Validate flight_number
+        if ($this->request()->getValue('flight_number') == "") {
+            $errors[] = "Pole Číslo letu musí byť vyplnené!";
+        } elseif (!preg_match("/^[A-Z0-9]+$/", $this->request()->getValue('flight_number'))) {
+            // Flight number can only contain uppercase letters and numbers (as per the typical format)
+            $errors[] = "Číslo letu musí obsahovať iba písmená a čísla!";
+        }
+
+        // Validate origin
+        if ($this->request()->getValue('origin') == "") {
+            $errors[] = "Pole Pôvod musí byť vyplnené!";
+        }
+
+        return $errors;
+    }
+
 
 }
