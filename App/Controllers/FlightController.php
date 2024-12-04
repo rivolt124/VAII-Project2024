@@ -3,15 +3,8 @@
 namespace App\Controllers;
 
 use App\Core\AControllerBase;
-use App\Core\DB\Connection;
-use App\Core\HTTPException;
-use App\Core\Model;
-use App\Core\Responses\RedirectResponse;
 use App\Core\Responses\Response;
-use App\Helpers\FileStorage;
 use App\Models\Flight;
-use http\Exception;
-use PDO;
 
 class FlightController extends AControllerBase
 {
@@ -28,89 +21,37 @@ class FlightController extends AControllerBase
         );
     }
 
-    public function add(): Response
+    public function create()
     {
+        if ($this->request()->getMethod() === 'POST') {
+            $data = $this->request()->getPost();
+            $this->db()->query("INSERT INTO flights (flight_number, origin, destination) VALUES (?, ?, ?)", [
+                $data['flight_number'], $data['origin'], $data['destination']
+            ]);
+            $this->redirect('flights');
+        }
         return $this->html();
     }
 
-    public function edit(): Response
+    public function edit()
     {
-        $id = (int) $this->request()->getValue('id');
-        $post = Post::getOne($id);
+        $flight_number = $this->request()->getParam('flight_number');
+        $flight = $this->db()->fetch("SELECT * FROM flights WHERE flight_number = ?", [$flight_number]);
 
-        if (is_null($post)) {
-            throw new HTTPException(404);
+        if ($this->request()->getMethod() === 'POST') {
+            $data = $this->request()->getPost();
+            $this->db()->query("UPDATE flights SET origin = ?, destination = ? WHERE flight_number = ?", [
+                $data['origin'], $data['destination'], $flight_number
+            ]);
+            $this->redirect('flights');
         }
-
-        return $this->html(
-            [
-                'post' => $post
-            ]
-        );
+        return $this->html(['flight' => $flight]);
     }
-
-    public function save()
-    {
-        $id = (int)$this->request()->getValue('id');
-        $oldFileName = "";
-
-        if ($id > 0) {
-            $post = Post::getOne($id);
-            $oldFileName = $post->getPicture();
-        } else {
-            $post = new Post();
-        }
-        $post->setText($this->request()->getValue('text'));
-        $post->setPicture($this->request()->getFiles()['picture']['name']);
-
-        $formErrors = $this->formErrors();
-        if (count($formErrors) > 0) {
-            return $this->html(
-                [
-                    'post' => $post,
-                    'errors' => $formErrors
-                ], ($id > 0) ? 'edit' : 'add'
-            );
-        } else {
-            if ($oldFileName != "") {
-                FileStorage::deleteFile($oldFileName);
-            }
-            $newFileName = FileStorage::saveFile($this->request()->getFiles()['picture']);
-            $post->setPicture($newFileName);
-            $post->save();
-            return new RedirectResponse($this->url("post.index"));
-        }
-    }
-
     public function delete()
     {
-        $id = (int) $this->request()->getValue('id');
-        $post = Post::getOne($id);
-
-        if (is_null($post)) {
-            throw new HTTPException(404);
-        } else {
-            FileStorage::deleteFile($post->getPicture());
-            $post->delete();
-            return new RedirectResponse($this->url("post.index"));
-        }
+        $flight_number = $this->request()->getParam('flight_number');
+        $this->db()->query("DELETE FROM flights WHERE flight_number = ?", [$flight_number]);
+        $this->redirect('flights');
     }
 
-    private function formErrors(): array
-    {
-        $errors = [];
-        if ($this->request()->getFiles()['picture']['name'] == "") {
-            $errors[] = "Pole Súbor obrázka musí byť vyplnené!";
-        }
-        if ($this->request()->getValue('text') == "") {
-            $errors[] = "Pole Text príspevku musí byť vyplnené!";
-        }
-        if ($this->request()->getFiles()['picture']['name'] != "" && !in_array($this->request()->getFiles()['picture']['type'], ['image/jpeg', 'image/png'])) {
-            $errors[] = "Obrázok musí byť typu JPG alebo PNG!";
-        }
-        if ($this->request()->getValue('text') != "" && strlen($this->request()->getValue('text') < 5)) {
-            $errors[] = "Počet znakov v text príspevku musí byť viac ako 5!";
-        }
-        return $errors;
-    }
 }

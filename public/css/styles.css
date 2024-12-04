@@ -1,9 +1,24 @@
 body {
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.index-selection {
+    margin: 0;
+    padding: 0;
+    height: 60vh;
+    width: 100vw;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    flex-grow: 1;
 }
 
 .index-selection.home {
     background-image: url('../images/flight.jpg');
+    height: 100vh;
 }
 
 .index-selection.about {
@@ -12,16 +27,6 @@ body {
 
 .index-selection.contact {
     background-image: url('../images/runway.jpg');
-}
-
-.index-selection {
-    height: 100vh;
-    width: 100vw;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    position: relative;
-    flex-grow: 1;
 }
 
 .index-selection::before {

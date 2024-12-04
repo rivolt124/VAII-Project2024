@@ -14,10 +14,27 @@
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="public/css/styl.css">
+    <link rel="stylesheet" href="public/css/styles.css">
     <script src="public/js/script.js"></script>
 </head>
 <body>
+
+<nav class="navbar navbar-expand-lg bg-light sticky-lg-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">UNIZA TRAVEL</a>
+        <button onclick="scrollToTop()" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="<?= $link->url("home.index") ?>">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?= $link->url("home.about") ?>">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?= $link->url("home.contact") ?>">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--
 <nav class="navbar navbar-expand-sm bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="public/html/index.html">
@@ -45,10 +62,18 @@
         <?php } ?>
     </div>
 </nav>
+-->
 <div class="container-fluid mt-3">
     <div class="web-content">
         <?= $contentHTML ?>
     </div>
 </div>
+
+<script>
+    // Smooth scroll to top
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
 </body>
 </html>
