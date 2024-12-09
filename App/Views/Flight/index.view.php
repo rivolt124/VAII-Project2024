@@ -35,10 +35,10 @@
             <div class="col-md-3 col-sm-6 col-12 text-center mb-4">
                 <div class="card shadow">
                     <div class="card-body">
-                        <h5 class="card-title"><?= htmlspecialchars($flight->getFlightNumber()) ?></h5>
+                        <h5 class="card-title"><?= $flight->getFlightNumber() ?></h5>
                         <p class="card-text">
-                            <strong>Origin:</strong> <?= htmlspecialchars($flight->getOrigin()) ?><br>
-                            <strong>Destination:</strong> <?= htmlspecialchars($flight->getDestination()) ?>
+                            <strong>Origin:</strong> <?= $flight->getOrigin() ?><br>
+                            <strong>Destination:</strong> <?= $flight->getDestination() ?>
                         </p>
                         <div class="d-flex justify-content-center gap-2">
                             <a href="<?= $link->url('flight.edit', ['id' => $flight->getId()]) ?>" class="btn btn-primary btn-sm">Edit</a>
