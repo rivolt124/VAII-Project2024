@@ -8,14 +8,10 @@ use App\Models\Flight;
 use App\Core\HTTPException;
 use App\Helpers\FileStorage;
 use App\Core\Responses\RedirectResponse;
-use App\Models\Post;
+//use App\Models\Post;
 
 class FlightController extends AControllerBase
 {
-    /**
-     * Example of an action (authorization needed)
-     * @return \App\Core\Responses\Response|\App\Core\Responses\ViewResponse
-     */
     public function index(): Response
     {
         return $this->html(
@@ -126,6 +122,4 @@ class FlightController extends AControllerBase
         }
         return $errors;
     }
-
-
 }

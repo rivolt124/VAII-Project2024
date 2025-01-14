@@ -1,30 +1,12 @@
 <?php
 /** @var \App\Core\IAuthenticator $auth */
-
 /** @var Array $data */
 /** @var \App\Models\Flight $flights */
 /** @var \App\Core\LinkGenerator $link */
 ?>
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #ff8a00, #e52e71);
-        overflow-x: hidden;
-        height: 100vh;
-    }
 
-    .btn {
-        border-color: black;
-        color: black;
-    }
-
-    .card:hover {
-        transform: scale(1.1);
-        transition: transform 0.5s ease;
-    }
-</style>
+<link rel="stylesheet" href="../../../public/css/flight.index.css">
+<script src="../../../public/js/flight.index.js"></script>
 
 <div class="container-fluid">
     <div class="row mb-4">
@@ -59,24 +41,3 @@
     </div>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const searchInput = document.getElementById('flightSearch');
-        const flightCards = document.querySelectorAll('.flight-card');
-
-        searchInput.addEventListener('input', function () {
-            const query = searchInput.value.toLowerCase();
-
-            flightCards.forEach(card => {
-                const origin = card.getAttribute('data-origin');
-                const destination = card.getAttribute('data-destination');
-
-                if (origin.includes(query) || destination.includes(query)) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    });
-</script>

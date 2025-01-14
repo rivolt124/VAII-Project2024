@@ -2,31 +2,8 @@
 /** @var \App\Core\LinkGenerator $link */
 /** @var \App\Core\IAuthenticator $auth */
 ?>
-
-<style>
-    /* Prevent scrolling */
-    body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-    }
-
-    .footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 50px; /* Fixed height */
-        background-color: #343a40;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .footer p {
-        margin: 0;
-    }
-</style>
+<link rel="stylesheet" href="../../../public/css/home.index.css">
+<script src="../../../public/js/home.index.js"></script>
 
 <section class="index-selection home d-flex justify-content-center align-items-center">
     <div class="container text-center">
@@ -48,30 +25,3 @@
         <p>&copy; 2024 UNIZA TRAVEL. All rights reserved.</p>
     </div>
 </footer>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const greetingElement = document.getElementById('greeting');
-        const hours = new Date().getHours();
-        let greeting;
-
-        if (hours < 12) {
-            greeting = "Good Morning!";
-        } else if (hours < 18) {
-            greeting = "Good Afternoon!";
-        } else {
-            greeting = "Good Evening!";
-        }
-
-        greetingElement.textContent = greeting;
-    });
-
-    document.getElementById('logoutJava')?.addEventListener('click', function(e) {
-        const confirmation = confirm('Are you sure you want to logout?');
-        if (!confirmation) {
-            e.preventDefault();
-        }
-    });
-</script>
-
-
