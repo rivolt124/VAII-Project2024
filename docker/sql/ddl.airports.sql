@@ -9,16 +9,18 @@ DROP TABLE IF EXISTS `airports`;
 CREATE TABLE `airports`
 (
     `id`            INT             NOT NULL AUTO_INCREMENT,
-    `IATA`          CHAR(3)         DEFAULT NULL,
+    `IATA`          CHAR(3)         NOT NULL,
     `airport_name`  VARCHAR(20)     NOT NULL,
     `country`       CHAR(2)         NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `IATA_unique` (`IATA`),
-    UNIQUE KEY `airport_name_unique` (`airport_name`)
+    UNIQUE KEY `airport_name_unique` (`airport_name`),
+    CONSTRAINT `fk_country`
+        FOREIGN KEY (`country`)
+            REFERENCES `countries` (`ISO`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
 
--- Insert data for 50 airports (this is just a sample)
 INSERT INTO `airports` (`IATA`, `airport_name`, `country`)
 VALUES
     ('LHR', 'Heathrow', 'GB'),
