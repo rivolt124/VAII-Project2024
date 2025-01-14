@@ -14,8 +14,10 @@ CREATE TABLE `flights`
     `destination`   CHAR(3)     DEFAULT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `flight_number_unique` (`flight_number`),
-    CONSTRAINT `fk_origin` FOREIGN KEY (`origin`) REFERENCES `airports` (`IATA`),
-    CONSTRAINT `fk_destination` FOREIGN KEY (`destination`) REFERENCES `airports` (`IATA`)
+    CONSTRAINT `fk_origin` FOREIGN KEY (`origin`)
+        REFERENCES `airports` (`IATA`),
+    CONSTRAINT `fk_destination` FOREIGN KEY (`destination`)
+        REFERENCES `airports` (`IATA`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
 
