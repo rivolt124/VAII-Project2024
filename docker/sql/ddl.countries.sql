@@ -8,9 +8,9 @@ SET NAMES utf8mb4;
 DROP TABLE IF EXISTS `countries`;
 CREATE TABLE `countries`
 (
-    `id`            INT             NOT NULL AUTO_INCREMENT,
+    `id`            INT            NOT NULL AUTO_INCREMENT,
     `ISO`           CHAR(2)        NOT NULL,
-    `country_name`  VARCHAR(20)    NOT NULL,
+    `country_name`  VARCHAR(30)    NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `ISO_unique` (`ISO`),
     UNIQUE KEY `country_name_unique` (`country_name`)
@@ -60,13 +60,10 @@ VALUES
     ('BE', 'Belgium'),
     ('PT', 'Portugal'),
     ('SA', 'Saudi Arabia'),
-    ('KR', 'South Korea'),
     ('VN', 'Vietnam'),
     ('PK', 'Pakistan'),
     ('PE', 'Peru'),
     ('CO', 'Colombia'),
     ('CL', 'Chile'),
-    ('PE', 'Peru'),
     ('BD', 'Bangladesh'),
-    ('AE', 'United Arab Emirates'),
     ('IQ', 'Iraq');
