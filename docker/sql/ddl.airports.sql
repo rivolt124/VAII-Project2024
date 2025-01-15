@@ -10,14 +10,12 @@ CREATE TABLE `airports`
 (
     `id`            INT             NOT NULL AUTO_INCREMENT,
     `IATA`          CHAR(3)         NOT NULL,
-    `airport_name`  VARCHAR(20)     NOT NULL,
+    `airport_name`  VARCHAR(50)     NOT NULL,
     `country`       CHAR(2)         NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `IATA_unique` (`IATA`),
     UNIQUE KEY `airport_name_unique` (`airport_name`),
-    CONSTRAINT `fk_country`
-        FOREIGN KEY (`country`)
-            REFERENCES `countries` (`ISO`)
+    CONSTRAINT `fk_country` FOREIGN KEY (`country`) REFERENCES `countries` (`ISO`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
 
@@ -27,7 +25,6 @@ VALUES
     ('CDG', 'Charles de Gaulle', 'FR'),
     ('FRA', 'Frankfurt', 'DE'),
     ('DXB', 'Dubai International', 'AE'),
-    ('SYD', 'Sydney', 'AU'),
     ('JFK', 'John F. Kennedy International', 'US'),
     ('LAX', 'Los Angeles International', 'US'),
     ('ORD', 'OHare International', 'US'),
@@ -50,7 +47,6 @@ VALUES
     ('IST', 'Istanbul Airport', 'TR'),
     ('SYD', 'Sydney Kingsford Smith', 'AU'),
     ('LGW', 'Gatwick', 'GB'),
-    ('LIM', 'Jorge Chávez International', 'PE'),
     ('BOM', 'Chhatrapati Shivaji International', 'IN'),
     ('DEL', 'Indira Gandhi International', 'IN'),
     ('SCL', 'Arturo Merino Benítez International', 'CL'),
@@ -65,7 +61,6 @@ VALUES
     ('SVO', 'Sheremetyevo International', 'RU'),
     ('LIS', 'Lisbon Airport', 'PT'),
     ('YVR', 'Vancouver International', 'CA'),
-    ('DXB', 'Dubai International', 'AE'),
     ('MEL', 'Melbourne Tullamarine', 'AU'),
     ('WAW', 'Warsaw Chopin', 'PL'),
     ('CPT', 'Cape Town International', 'ZA');

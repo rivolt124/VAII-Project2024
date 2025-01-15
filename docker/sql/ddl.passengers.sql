@@ -8,10 +8,10 @@ SET NAMES utf8mb4;
 DROP TABLE IF EXISTS `passengers`;
 CREATE TABLE `passengers`
 (
-    `id`            INT             NOT NULL AUTO_INCREMENT,
+    `id`             INT             NOT NULL AUTO_INCREMENT,
     `PASSPORT_ID`    INTEGER         NOT NULL,
-    `name`           VARCHAR(20)     NOT NULL,
-    `surname`        VARCHAR(20)     NOT NULL,
+    `name`           VARCHAR(20)     DEFAULT NULL,
+    `surname`        VARCHAR(20)     DEFAULT NULL,
     `birth_number`   CHAR(11)        NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `passport_id_unique` (`PASSPORT_ID`)
