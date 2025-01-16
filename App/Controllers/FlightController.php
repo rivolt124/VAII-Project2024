@@ -113,13 +113,13 @@ class FlightController extends AControllerBase
             $errors[] = "Origin musí byť zadefinovaný!";
         } elseif (!preg_match("/^[A-Z]+$/", $this->request()->getValue('origin'))) {
             $errors[] = "Origin môže pozostávať len z veľkych písmen";
-        } elseif (strlen($this->request()->getValue('origin'))) {
+        } elseif (strlen($this->request()->getValue('origin')) > 3) {
             $errors[] = "Origin môže môže mať maximálne 3 znakov!";
         }
 
         if (!preg_match("/^[A-Z]+$/", $this->request()->getValue('destination')) && $this->request()->getValue('destination') != "") {
             $errors[] = "Destination môže pozostávať len z veľkych písmen";
-        } elseif (strlen($this->request()->getValue('destination'))) {
+        } elseif (strlen($this->request()->getValue('destination')) > 3) {
             $errors[] = "Destination môže môže mať maximálne 3 znakov!";
         }
         return $errors;
