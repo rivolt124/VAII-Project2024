@@ -7,22 +7,23 @@ use App\Core\Model;
 class Flight extends Model
 {
 
-    protected ?int $id = null;
-    protected ?string $flight_number;
-    protected ?string $origin;
+    protected int $id;
+    protected string $flight_number;
+    protected string $origin;
     protected ?string $destination;
+    protected ?string $airplane;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function setId(?int $id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
 
-    public function getFlightNumber(): ?string
+    public function getFlightNumber(): string
     {
         return $this->flight_number;
     }
@@ -32,7 +33,7 @@ class Flight extends Model
         $this->flight_number = $flight_number;
     }
 
-    public function getOrigin(): ?string
+    public function getOrigin(): string
     {
         return $this->origin;
     }
@@ -47,8 +48,18 @@ class Flight extends Model
         return $this->destination;
     }
 
-    public function setDestination(string $destination): void
+    public function setDestination(?string $destination): void
     {
         $this->destination = $destination;
+    }
+
+    public function getAirplane(): ?string
+    {
+        return $this->airplane;
+    }
+
+    public function setAirplane(?string $airplane): void
+    {
+        $this->airplane = $airplane;
     }
 }

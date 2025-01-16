@@ -9,9 +9,9 @@ DROP TABLE IF EXISTS `tickets`;
 CREATE TABLE `tickets`
 (
     `id`            INT             NOT NULL AUTO_INCREMENT,
-    `ticket_number` INT             NOT NULL,
+    `ticket_number` INT(4)          NOT NULL,
     `flight_number` varchar(6)      NOT NULL,
-    `passport_id`   INT             NOT NULL,
+    `passport_id`   INTEGER(5)      NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `ticket_number_unique` (`ticket_number`),
     CONSTRAINT `fk_ticket_flight` FOREIGN KEY (`flight_number`) REFERENCES `flights` (`flight_number`) ON DELETE CASCADE,
@@ -21,8 +21,7 @@ CREATE TABLE `tickets`
 
 INSERT INTO `tickets` (`ticket_number`, `flight_number`, `passport_id`)
 VALUES
-    (102, 'LH102', 87654321),
-    (103, 'AF203', 11223344),
-    (104, 'EK104', 99887766),
-    (105, 'SQ105', 33445566),
-    (106, 'AA206', 44556677);
+    (1002, 'LH102', 12345),
+    (1003, 'AF203', 67890),
+    (1004, 'EK104', 12345),
+    (1005, 'SQ105', 67890);
