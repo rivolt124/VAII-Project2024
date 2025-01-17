@@ -87,8 +87,3 @@ $layout = 'auth';
         </div>
     </div>
 </div>
-
-<footer class="footer">
-    <p>UNIZA TRAVEL</p>
-    <p>&copy; 2024 UNIZA TRAVEL. All rights reserved.</p>
-</footer>

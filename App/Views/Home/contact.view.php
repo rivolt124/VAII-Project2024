@@ -30,10 +30,16 @@
     </div>
 
     <h4 class="mt-4 text-center">Follow Us on Social Media:</h4>
-    <div class="text-center">
-        <a href="https://www.facebook.com/UNIZATravel" target="_blank" class="me-3">Facebook</a>
-        <a href="https://www.instagram.com/UNIZATravel" target="_blank" class="me-3">Instagram</a>
-        <a href="https://www.twitter.com/UNIZATravel" target="_blank">Twitter</a>
+    <div class="text-center mb-4">
+        <a href="https://www.facebook.com/UNIZATravel" target="_blank" class="me-3">
+            <i class="bi bi-facebook"></i> Facebook
+        </a>
+        <a href="https://www.instagram.com/UNIZATravel" target="_blank" class="me-3">
+            <i class="bi bi-instagram"></i> Instagram
+        </a>
+        <a href="https://www.twitter.com/UNIZATravel" target="_blank">
+            <i class="bi bi-twitter-x"></i> Twitter
+        </a>
     </div>
 </section>
 
@@ -44,10 +50,3 @@
 
     </div>
 </div>
-
-<footer class="footer text-center py-3 mt-auto bg-dark text-white">
-    <div class="container">
-        <p>UNIZA TRAVEL</p>
-        <p>&copy; 2024 UNIZA TRAVEL. All rights reserved.</p>
-    </div>
-</footer>

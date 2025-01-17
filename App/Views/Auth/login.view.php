@@ -5,105 +5,7 @@ $layout = 'auth';
 /** @var \App\Core\LinkGenerator $link */
 ?>
 
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #ff8a00, #e52e71);
-        overflow: hidden;
-        height: 100vh;
-    }
-
-    .card-signin {
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        border: none;
-        background-color: rgba(255, 255, 255, 0.8);
-        padding: 30px;
-        max-width: 400px;
-        width: 100%;
-    }
-
-    .card-title {
-        font-size: 2rem;
-        color: #333;
-        margin-bottom: 20px;
-    }
-
-    .form-label-group {
-        margin-bottom: 1.5rem;
-    }
-
-    .form-control {
-        border-radius: 5px;
-        border: 1px solid #ddd;
-        font-size: 1.1rem;
-        padding: 10px;
-        height: 45px;
-        width: 100%;
-        box-sizing: border-box;
-        white-space: nowrap;
-    }
-
-    .form-control:focus {
-        border-color: #feb47b;
-        box-shadow: 0 0 10px rgba(255, 126, 95, 0.5);
-        outline: none;
-    }
-
-    .btn-primary {
-        background-color: #feb47b;
-        border: none;
-        color: white;
-        font-size: 1.2rem;
-        padding: 10px 20px;
-        width: 100%;
-        border-radius: 5px;
-        transition: background-color 0.3s ease;
-    }
-
-    .btn-primary:hover {
-        background-color: #ff7e5f;
-    }
-
-    .text-danger {
-        font-size: 1.1rem;
-        font-weight: bold;
-    }
-
-    .form-signin input {
-        word-wrap: normal;
-    }
-
-    @media (max-width: 768px) {
-        .card-signin {
-            padding: 20px;
-        }
-
-        .card-title {
-            font-size: 1.8rem;
-        }
-    }
-
-    .footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 50px;
-        background-color: #343a40;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .footer p {
-        margin: 0;
-    }
-    /* generovane pomocou AI */
-</style>
-
+<link rel="stylesheet" href="../../../public/css/auth.login.css">
 
 <div class="container">
     <div class="row">
@@ -135,9 +37,3 @@ $layout = 'auth';
     </div>
 </div>
 
-<footer class="footer text-center py-3 mt-auto bg-dark text-white">
-    <div class="container">
-        <p>UNIZA TRAVEL</p>
-        <p>&copy; 2024 UNIZA TRAVEL. All rights reserved.</p>
-    </div>
-</footer>
