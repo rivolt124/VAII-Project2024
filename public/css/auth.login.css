@@ -41,13 +41,13 @@ body {
 }
 
 .form-control:focus {
-    border-color: #feb47b;
+    border-color: #d9534f;
     box-shadow: 0 0 10px rgba(255, 126, 95, 0.5);
     outline: none;
 }
 
 .btn-primary {
-    background-color: #feb47b;
+    background-color: #d9534f;
     border: none;
     color: white;
     font-size: 1.2rem;

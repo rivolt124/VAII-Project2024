@@ -1,0 +1,22 @@
+.card-signin {
+    margin: auto;
+}
+
+.card-title {
+    text-align: center;
+}
+
+.message-container {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.message-container a {
+    color: #d9534f;
+    text-decoration: none;
+}
+
+.message-container a:hover {
+    text-decoration: underline;
+}
