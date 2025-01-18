@@ -5,7 +5,7 @@
 /** @var \App\Core\LinkGenerator $link */
 ?>
 
-<link rel="stylesheet" href="../../../public/css/flight.index.css">
+<link rel="stylesheet" href="../../../public/css/crud.css">
 <script src="../../../public/js/flight.index.js"></script>
 
 <div class="container-fluid">
