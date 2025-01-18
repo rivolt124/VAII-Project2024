@@ -2,6 +2,7 @@
 
 $layout = 'auth';
 /** @var \App\Core\LinkGenerator $link */
+$showFooter = false;
 ?>
 
 

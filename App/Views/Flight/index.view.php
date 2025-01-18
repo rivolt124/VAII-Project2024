@@ -30,6 +30,9 @@
                             <strong>Origin:</strong> <?= $flight->getOrigin() ?><br>
                             <strong>Destination:</strong> <?= $flight->getDestination() ?>
                         </p>
+                        <?php if ($flight->getAirplane()): ?>
+                            <img src="<?= $flight->getPicture() ?>" alt="Airplane Picture" class="img-fluid mb-2" style="max-height: 200px; width: auto;">
+                        <?php endif; ?>
                         <div class="d-flex justify-content-center gap-2">
                             <a href="<?= $link->url('flight.edit', ['id' => $flight->getId()]) ?>" class="btn btn-primary btn-sm">Edit</a>
                             <a href="<?= $link->url('flight.delete', ['id' => $flight->getId()]) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this flight?');">Delete</a>
@@ -40,4 +43,3 @@
         <?php endforeach; ?>
     </div>
 </div>
-

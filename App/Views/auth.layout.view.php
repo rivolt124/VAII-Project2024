@@ -1,6 +1,8 @@
 <?php
 /** @var string $contentHTML */
 use App\Config\Configuration;
+
+$showFooter = $showFooter ?? true;
 ?>
 
 <!DOCTYPE html>
@@ -20,12 +22,14 @@ use App\Config\Configuration;
     </div>
 </div>
 
-<footer class="footer text-center py-3 mt-auto bg-dark text-white">
-    <div class="container">
-        <p>UNIZA TRAVEL</p>
-        <p>&copy; 2024 UNIZA TRAVEL. All rights reserved.</p>
-    </div>
-</footer>
+<?php if ($showFooter): ?>
+    <footer class="footer text-center py-3 mt-auto bg-dark text-white">
+        <div class="container">
+            <p>UNIZA TRAVEL</p>
+            <p>&copy; 2024 UNIZA TRAVEL. All rights reserved.</p>
+        </div>
+    </footer>
+<?php endif; ?>
 
 </body>
 </html>

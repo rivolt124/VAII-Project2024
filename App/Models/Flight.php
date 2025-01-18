@@ -12,6 +12,7 @@ class Flight extends Model
     protected string $origin;
     protected ?string $destination;
     protected ?string $airplane;
+    protected ?string $picture = "../../public/images/vaiicko_logo.png";
 
     public function getId(): int
     {
@@ -61,5 +62,15 @@ class Flight extends Model
     public function setAirplane(?string $airplane): void
     {
         $this->airplane = $airplane;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): void
+    {
+        $this->picture = $picture;
     }
 }

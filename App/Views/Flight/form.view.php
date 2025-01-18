@@ -21,7 +21,10 @@
     <div class="input-group has-validation mb-3 ">
         <textarea class="form-control" aria-label="With textarea" name="destination" id="post-text"><?= @$data['flight']?->getDestination() ?></textarea>
     </div>
-
+    <label for="airplane" class="form-label">Airplane</label>
+    <div class="input-group has-validation mb-3 ">
+        <input type="text" class="form-control" name="airplane" id="airplane" value="<?= @$data['flight']?->getAirplane() ?>" required>
+    </div>
 
     <button type="submit" class="btn btn-primary">Save</button>
     <button type="button" class="btn btn-secondary" onclick="location.href='<?= $link->url("flight.index") ?>'">Return</button>

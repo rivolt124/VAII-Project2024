@@ -6,6 +6,8 @@
 use App\Config\Configuration;
 use App\Core\IAuthenticator;
 use App\Core\LinkGenerator;
+
+$showFooter = $showFooter ?? true;
 ?>
 
 <!DOCTYPE html>
@@ -30,6 +32,7 @@ use App\Core\LinkGenerator;
                 <?php if ($auth->isLogged()): ?>
                     <li class="nav-item"><a class="nav-link" href="<?= $link->url("flight.index") ?>">Manage Flights</a></li>
                 <?php endif; ?>
+                <li class="nav-item"><a class="nav-link" href="<?= $link->url("users.index") ?>">Active Users</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?= $link->url("home.index") ?>">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?= $link->url("home.about") ?>">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?= $link->url("home.contact") ?>">Contact</a></li>
@@ -44,12 +47,14 @@ use App\Core\LinkGenerator;
     </div>
 </div>
 
-<footer class="footer text-center py-3 mt-auto bg-dark text-white">
-    <div class="container">
-        <p>UNIZA TRAVEL</p>
-        <p>&copy; 2024 UNIZA TRAVEL. All rights reserved.</p>
-    </div>
-</footer>
+<?php if ($showFooter): ?>
+    <footer class="footer text-center py-3 mt-auto bg-dark text-white">
+        <div class="container">
+            <p>UNIZA TRAVEL</p>
+            <p>&copy; 2024 UNIZA TRAVEL. All rights reserved.</p>
+        </div>
+    </footer>
+<?php endif; ?>
 
 </body>
 </html>

@@ -3,6 +3,8 @@
 $layout = 'auth';
 /** @var Array $data */
 /** @var \App\Core\LinkGenerator $link */
+
+$showFooter = false;
 ?>
 
 <link rel="stylesheet" href="../../../public/css/auth.login.css">
@@ -18,7 +20,7 @@ $layout = 'auth';
                     </div>
                     <form class="form-signin" method="post" action="<?= $link->url("login") ?>">
                         <div class="form-label-group mb-3">
-                            <input name="login" type="text" id="login" class="form-control" placeholder="Login"
+                            <input name="login" type="text" id="login" class="form-control" placeholder="Email"
                                    required autofocus>
                         </div>
 
@@ -27,10 +29,12 @@ $layout = 'auth';
                                    placeholder="Password" required>
                         </div>
                         <div class="text-center">
-                            <button class="btn btn-primary" type="submit" name="submit">Prihlásiť
-                            </button>
+                            <button class="btn btn-primary" type="submit" name="submit">Login</button>
                         </div>
                     </form>
+                    <div class="text-center">
+                        <button class="btn btn-secondary" onclick="history.back()">Return</button>
+                    </div>
                 </div>
             </div>
         </div>

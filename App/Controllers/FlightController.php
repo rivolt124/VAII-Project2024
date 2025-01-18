@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
 use App\Models\Flight;
+use App\Models\Airplane;
 use App\Core\HTTPException;
 use App\Helpers\FileStorage;
 use App\Core\Responses\RedirectResponse;
@@ -49,6 +50,18 @@ class FlightController extends AControllerBase
             $flight->setOrigin($this->request()->getValue('origin'));
             $destination = $this->request()->getValue('destination');
             $flight->setDestination($destination ?: "N/A");
+
+            $airplane = Airplane::getOne($id);
+            if ($airplane) {
+                // Set the airplane object
+                $flight->setAirplane($airplane->getRegistration());
+
+                // Set the picture from the airplane if available
+                $flight->setPicture($airplane->getPicture() ?: $flight->getPicture());
+            } else {
+                // Fallback if no airplane is found, keep the default picture
+                $flight->setPicture($flight->getPicture());
+            }
 
             $flight->save();
 

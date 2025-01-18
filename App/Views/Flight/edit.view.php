@@ -2,7 +2,7 @@
 
 /** @var \App\Core\LinkGenerator $link */
 /** @var Array $data */
-
+$showFooter = false;
 ?>
 <div class="container">
     <div class="row justify-content-center">
