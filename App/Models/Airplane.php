@@ -32,7 +32,7 @@ class Airplane extends Model
         $this->registration = $registration;
     }
 
-    public function geType(): string
+    public function getType(): string
     {
         return $this->type;
     }
