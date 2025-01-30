@@ -36,7 +36,7 @@ class Schedule extends Model
         return $this->date;
     }
 
-    public function setPassportId($date): void
+    public function setDate($date): void
     {
         $this->date = $date;
     }
