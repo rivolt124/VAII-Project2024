@@ -42,14 +42,14 @@ $showFooter = $showFooter ?? true;
     </div>
 </nav>
 
-<div class="container-fluid mt-3">
+<div class="container-fluid px-0">
     <div class="web-content">
         <?= $contentHTML ?>
     </div>
 </div>
 
 <?php if ($showFooter): ?>
-    <footer class="footer text-center py-3 mt-auto bg-dark text-white">
+    <footer class="footer text-center mt-auto bg-dark text-white py-4">
         <div class="container">
             <p>UNIZA TRAVEL</p>
             <p>&copy; 2024 UNIZA TRAVEL. All rights reserved.</p>
