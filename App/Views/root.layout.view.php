@@ -32,6 +32,7 @@ $showFooter = $showFooter ?? true;
                 <?php if ($auth->isLogged()): ?>
                     <li class="nav-item"><a class="nav-link" href="<?= $link->url("flight.index") ?>">Manage Flights</a></li>
                 <?php endif; ?>
+                <li class="nav-item"><a class="nav-link" href="<?= $link->url("schedule.index") ?>">Schedules</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?= $link->url("users.index") ?>">Active Users</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?= $link->url("airplane.index") ?>">Airplanes</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?= $link->url("home.index") ?>">Home</a></li>
