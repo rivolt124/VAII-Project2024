@@ -17,29 +17,29 @@ interface IAuthenticator
      */
     public function login($login, $password): bool;
 
+    public function register($login, $password, $name): bool;
+
+    public function edit(mixed $login, mixed $password, mixed $name): bool;
+
     /**
      * Perform user login
      * @return void
      */
     public function logout(): void;
 
+    public function getUserAccess(): int;
+
     /**
      * Return name of a logged user
      * @return string
      */
-    public function getLoggedUserName(): string;
+    public function getLoggedUserName();
 
     /**
      * Return id of a logged user
      * @return mixed
      */
     public function getLoggedUserId(): mixed;
-
-    /**
-     * Return a context of logged user, e.g. user class instance
-     * @return mixed
-     */
-    public function getLoggedUserContext(): mixed;
 
     /**
      * Return, if a user is logged or not

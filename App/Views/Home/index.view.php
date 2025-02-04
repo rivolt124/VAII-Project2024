@@ -15,7 +15,8 @@
         <?php endif; ?>
         <?php if ($auth->isLogged()): ?>
             <a href="<?= $link->url("auth.logout") ?>" id="logoutJava" class="btn btn-outline-danger mt-2">Logout</a>
-            <a href="<?= $link->url("flight.index") ?>" class="btn btn-outline-danger mt-2" >Manage Flights</a>
+            <a href="..." class="btn btn-outline-danger mt-2" >Delete Account</a>
+            <a href="..." class="btn btn-outline-danger mt-2" >Remove Passport</a>
         <?php endif; ?>
     </div>
 

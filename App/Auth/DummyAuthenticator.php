@@ -3,46 +3,65 @@
 namespace App\Auth;
 
 use App\Core\IAuthenticator;
+use App\Models\User;
 
-/**
- * Class DummyAuthenticator
- * Basic implementation of user authentication
- * @package App\Auth
- */
 class DummyAuthenticator implements IAuthenticator
 {
-    public const LOGIN = "admin";
-    public const PASSWORD_HASH = '$2y$10$GRA8D27bvZZw8b85CAwRee9NH5nj4CQA6PDFMc90pN9Wi4VAWq3yq'; // admin
-    public const USERNAME = "Admin";
 
-    /**
-     * DummyAuthenticator constructor
-     */
     public function __construct()
     {
         session_start();
     }
 
-    /**
-     * Verify, if the user is in DB and has his password is correct
-     * @param $login
-     * @param $password
-     * @return bool
-     * @throws \Exception
-     */
     public function login($login, $password): bool
     {
-        if ($login == self::LOGIN && password_verify($password, self::PASSWORD_HASH)) {
-            $_SESSION['user'] = self::USERNAME;
-            return true;
-        } else {
-            return false;
+        $users = User::getAll('`email` LIKE ?', [$login], limit: 1);
+        if (sizeof($users) > 0) {
+            if ($password == $users[0]->getPassword()) { /* password_verify($password, $users[0]->getPassword()) */
+                $_SESSION['user'] = $users[0]->getId();
+                return true;
+            }
         }
+
+        return false;
     }
 
-    /**
-     * Logout the user
-     */
+    public function register($login, $password, $name): bool
+    {
+        $users = User::getAll();
+        foreach ($users as $user) {
+            if ($user->getEmail() == $login) {
+                return false;
+            }
+        }
+        $newUser = new User();
+        $newUser->setEmail($login);
+        $newUser->setPassword(password_hash($password, PASSWORD_DEFAULT));
+        $newUser->setName($name);
+        $newUser->setAccess(0);
+
+        $newUser->save();
+        $_SESSION['user'] = $newUser->getId();
+
+        return true;
+    }
+
+    public function edit($login, $password, $name): bool
+    {
+        $users = User::getAll();
+        foreach ($users as $user) {
+            if ($user->getEmail() == $login)
+            {
+                $user->setEmail($login);
+                $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
+                $user->setName($name);
+                $user->save();
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function logout(): void
     {
         if (isset($_SESSION["user"])) {
@@ -51,38 +70,26 @@ class DummyAuthenticator implements IAuthenticator
         }
     }
 
-    /**
-     * Get the name of the logged-in user
-     * @return string
-     * @throws \Exception
-     */
-    public function getLoggedUserName(): string
+    public function getUserAccess(): int
     {
-        return isset($_SESSION['user']) ? $_SESSION['user'] : throw new \Exception("Users not logged in");
+        return User::getOne($this->getLoggedUserId())->getAccess();
     }
 
-    /**
-     * Get the context of the logged-in user
-     * @return string
-     */
-    public function getLoggedUserContext(): mixed
+    public function getLoggedUserName()
     {
-        return null;
+        if (!isset($_SESSION['user']))
+            return null;
+
+        $user = User::getOne($_SESSION['user']);
+
+        return $user->getName();
     }
 
-    /**
-     * Return if the user is authenticated or not
-     * @return bool
-     */
     public function isLogged(): bool
     {
         return isset($_SESSION['user']) && $_SESSION['user'] != null;
     }
 
-    /**
-     * Return the id of the logged-in user
-     * @return mixed
-     */
     public function getLoggedUserId(): mixed
     {
         return $_SESSION['user'];
