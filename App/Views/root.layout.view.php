@@ -30,12 +30,13 @@ $showFooter = $showFooter ?? true;
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <?php if ($auth->isLogged()): ?>
-                    <li class="nav-item"><a class="nav-link" href="<?= $link->url("flight.index") ?>">Manage Flights</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= $link->url("schedule.index") ?>">Schedules</a></li>
+                    <?php if ($auth->getUserAccess() == 1): ?>
+                        <li class="nav-item"><a class="nav-link" href="<?= $link->url("user.index") ?>">Registered Users</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?= $link->url("airplane.index") ?>">Airplanes</a></li>
+                    <?php endif; ?>
+                    <li><p class="nav-link text-white">|</p></li>
                 <?php endif; ?>
-                <li class="nav-item"><a class="nav-link" href="<?= $link->url("schedule.index") ?>">Schedules</a></li>
-                <li class="nav-item"><a class="nav-link" href="<?= $link->url("user.index") ?>">Active Users</a></li>
-                <li class="nav-item"><a class="nav-link" href="<?= $link->url("airplane.index") ?>">Airplanes</a></li>
-                <li><p class="nav-link text-white">|</p></li>
                 <li class="nav-item"><a class="nav-link" href="<?= $link->url("home.index") ?>">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?= $link->url("home.about") ?>">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?= $link->url("home.contact") ?>">Contact</a></li>
