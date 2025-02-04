@@ -1,24 +1,21 @@
- document.addEventListener('DOMContentLoaded', function ()
- {
+document.addEventListener('DOMContentLoaded', function () {
     const searchInput = document.getElementById('flightSearch');
-    const flightCards = document.querySelectorAll('.flight-card');
+    const tableRows = document.querySelectorAll('table tbody tr'); // Select all table rows in the tbody
 
-    searchInput.addEventListener('input', function ()
-    {
+    searchInput.addEventListener('input', function () {
         const query = searchInput.value.toLowerCase();
 
-        flightCards.forEach(card =>
-        {
-            const origin = card.getAttribute('data-origin');
-            const destination = card.getAttribute('data-destination');
+        tableRows.forEach(row => {
+            const originCell = row.cells[1]; // The second cell (index 1) contains the origin
+            const destinationCell = row.cells[2]; // The third cell (index 2) contains the destination
 
-            if (origin.includes(query) || destination.includes(query))
-            {
-                card.style.display = '';
-            }
-            else
-            {
-                card.style.display = 'none';
+            const origin = originCell.textContent.toLowerCase();
+            const destination = destinationCell.textContent.toLowerCase();
+
+            if (origin.includes(query) || destination.includes(query)) {
+                row.style.display = ''; // Show the row
+            } else {
+                row.style.display = 'none'; // Hide the row
             }
         });
     });

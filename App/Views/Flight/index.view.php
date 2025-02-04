@@ -9,7 +9,7 @@
 <script src="../../../public/js/flight.index.js"></script>
 
 <div class="container-fluid">
-    <div class="row mb-4">
+    <div class="row mb-4 pt-4">
         <div class="col">
             <h2 class="text-center">Our Flights</h2>
             <div class="text-center mb-3">
@@ -20,26 +20,35 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-center" id="flightList">
-        <?php foreach ($data['flights'] as $flight): ?>
-            <div class="col-md-3 col-sm-6 col-12 text-center mb-4 flight-card" data-origin="<?= strtolower($flight->getOrigin()) ?>" data-destination="<?= strtolower($flight->getDestination()) ?>">
-                <div class="card shadow">
-                    <div class="card-body">
-                        <h5 class="card-title"><?= $flight->getFlightNumber() ?></h5>
-                        <p class="card-text">
-                            <strong>Origin:</strong> <?= $flight->getOrigin() ?><br>
-                            <strong>Destination:</strong> <?= $flight->getDestination() ?>
-                        </p>
-                        <?php if ($flight->getAirplane()): ?>
-                            <img src="<?= $flight->getPicture() ?>" alt="Airplane Picture" class="img-fluid mb-2" style="max-height: 200px; width: auto;">
-                        <?php endif; ?>
-                        <div class="d-flex justify-content-center gap-2">
-                            <a href="<?= $link->url('flight.edit', ['id' => $flight->getId()]) ?>" class="btn btn-primary btn-sm">Edit</a>
-                            <a href="<?= $link->url('flight.delete', ['id' => $flight->getId()]) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this flight?');">Delete</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <?php endforeach; ?>
+
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <table class="table table-striped table-bordered text-center">
+                <thead class="table-dark">
+                <tr>
+                    <th>Flight Number</th>
+                    <th>Origin</th>
+                    <th>Destination</th>
+                    <th>Airplane</th>
+                    <th class="actions-column">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($data['flights'] as $flight): ?>
+                    <tr>
+                        <td><?= $flight->getFlightNumber() ?></td>
+                        <td><?= $flight->getOrigin() ?></td>
+                        <td><?= $flight->getDestination() ?></td>
+                        <td><?= $flight->getAirplane() ?></td>
+                        <td>
+                            <a href="<?= $link->url('flight.edit', ['id' => $flight->getId()]) ?>" class="btn btn-primary btn-sm border-0">Edit</a>
+                            <a href="<?= $link->url('flight.delete', ['id' => $flight->getId()]) ?>" class="btn btn-danger btn-sm border-0" onclick="return confirm('Are you sure you want to delete this flight?');">Delete</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+
