@@ -29,8 +29,6 @@ class HomeController extends AControllerBase
      */
     public function index(): Response
     {
-        //$flight = Flight::getAll();
-        //return $this->html($flight);
         return $this->html();
     }
 
