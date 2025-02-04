@@ -30,7 +30,7 @@
                     <th>Origin</th>
                     <th>Destination</th>
                     <th>Airplane</th>
-                    <th class="actions-column">Actions</th>
+                    <th class="actions-column"></th>
                 </tr>
                 </thead>
                 <tbody>

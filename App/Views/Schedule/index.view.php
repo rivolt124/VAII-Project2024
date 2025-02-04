@@ -25,7 +25,7 @@
                     <th>Date</th>
                     <th>Departing</th>
                     <th>Arriving</th>
-                    <th>Actions</th>
+                    <th class="actions-column"></th>
                 </tr>
                 </thead>
                 <tbody>
