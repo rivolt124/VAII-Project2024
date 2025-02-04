@@ -32,8 +32,9 @@ $showFooter = $showFooter ?? true;
                 <?php if ($auth->isLogged()): ?>
                     <li class="nav-item"><a class="nav-link" href="<?= $link->url("schedule.index") ?>">Schedules</a></li>
                     <?php if ($auth->getUserAccess() == 1): ?>
-                        <li class="nav-item"><a class="nav-link" href="<?= $link->url("user.index") ?>">Registered Users</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?= $link->url("flight.index") ?>">Flights</a></li>
                         <li class="nav-item"><a class="nav-link" href="<?= $link->url("airplane.index") ?>">Airplanes</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?= $link->url("user.index") ?>">Registered Users</a></li>
                     <?php endif; ?>
                     <li><p class="nav-link text-white">|</p></li>
                 <?php endif; ?>

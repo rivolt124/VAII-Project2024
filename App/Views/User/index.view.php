@@ -11,9 +11,11 @@
     <div class="row mb-4 pt-4">
         <div class="col">
             <h2 class="text-center">Registered Users</h2>
-            <div class="text-center">
-                <a href="<?= $link->url('users.add') ?>" class="btn btn-outline-danger mt-2">Add User</a>
-            </div>
+            <?php if ($auth->getUserAccess() == 1): ?>
+                <div class="text-center">
+                    <a href="<?= $link->url('user.add') ?>" class="btn btn-outline-danger mt-2">Add User</a>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
     <div class="row justify-content-center" id="flightList">
