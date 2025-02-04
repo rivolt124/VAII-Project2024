@@ -35,6 +35,7 @@ $showFooter = $showFooter ?? true;
                 <li class="nav-item"><a class="nav-link" href="<?= $link->url("schedule.index") ?>">Schedules</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?= $link->url("user.index") ?>">Active Users</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?= $link->url("airplane.index") ?>">Airplanes</a></li>
+                <li><p class="nav-link text-white">|</p></li>
                 <li class="nav-item"><a class="nav-link" href="<?= $link->url("home.index") ?>">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?= $link->url("home.about") ?>">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?= $link->url("home.contact") ?>">Contact</a></li>
