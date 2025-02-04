@@ -9,7 +9,7 @@ use App\Core\HTTPException;
 use App\Helpers\FileStorage;
 use App\Core\Responses\RedirectResponse;
 
-class UsersController extends AControllerBase
+class UserController extends AControllerBase
 {
     public function index(): Response
     {
@@ -97,7 +97,7 @@ class UsersController extends AControllerBase
         } else {
             FileStorage::deleteFile($user->getEmail());
             $user->delete();
-            return new RedirectResponse($this->url("home.index"));
+            return new RedirectResponse($this->url("user.index"));
         }
     }
 

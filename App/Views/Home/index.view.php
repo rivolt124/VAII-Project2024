@@ -11,7 +11,7 @@
         <p id="greeting" class="text-white"></p>
         <?php if (!$auth->isLogged()): ?>
             <a href="<?= $link->url("auth.login") ?>" class="btn btn-outline-danger mt-2" >Login</a>
-            <a href="<?= $link->url("users.register") ?>" class="btn btn-outline-danger mt-2" >Register</a>
+            <a href="<?= $link->url("user.register") ?>" class="btn btn-outline-danger mt-2" >Register</a>
         <?php endif; ?>
         <?php if ($auth->isLogged()): ?>
             <a href="<?= $link->url("auth.logout") ?>" id="logoutJava" class="btn btn-outline-danger mt-2">Logout</a>

@@ -27,8 +27,8 @@
                             <strong>Password:</strong> <?= $user->getPassword() ?><br>
                         </p>
                         <div class="d-flex justify-content-center gap-2">
-                            <a href="<?= $link->url('users.edit', ['id' => $user->getId()]) ?>" class="btn btn-primary btn-sm border-0">Edit</a>
-                            <a href="<?= $link->url('users.delete', ['id' => $user->getId()]) ?>" class="btn btn-danger btn-sm border-0" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                            <a href="<?= $link->url('user.edit', ['id' => $user->getId()]) ?>" class="btn btn-primary btn-sm border-0">Edit</a>
+                            <a href="<?= $link->url('user.delete', ['id' => $user->getId()]) ?>" class="btn btn-danger btn-sm border-0" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
                         </div>
                     </div>
                 </div>
