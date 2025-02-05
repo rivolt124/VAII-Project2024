@@ -9,7 +9,8 @@ body {
     flex-direction: column;
 }
 
-.card:hover {
+.card:hover,
+.ticket-card:hover {
     transform: scale(1.1);
     transition: transform 0.5s ease;
 }
@@ -17,4 +18,30 @@ body {
 .actions-column {
     width: 170px;
     white-space: nowrap;
+}
+
+.ticket-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    width: 100%;
+    max-width: 320px;
+    border: 2px dashed #007bff;
+}
+
+.ticket-header {
+    background: #007bff;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 10px 10px 0 0;
+}
+
+.ticket-body {
+    padding: 15px;
+}
+
+.ticket-footer {
+    padding: 10px;
+    border-top: 2px dashed #007bff;
 }

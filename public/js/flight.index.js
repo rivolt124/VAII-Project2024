@@ -1,22 +1,35 @@
+// AJAX
 document.addEventListener('DOMContentLoaded', function () {
     const searchInput = document.getElementById('flightSearch');
-    const tableRows = document.querySelectorAll('table tbody tr');
+    const tableBody = document.querySelector('table tbody');
 
     searchInput.addEventListener('input', function () {
-        const query = searchInput.value.toLowerCase();
+        const query = searchInput.value.toUpperCase();
 
-        tableRows.forEach(row => {
-            const originCell = row.cells[1];
-            const destinationCell = row.cells[2];
+        fetch('/search-flights', {                  // posle ajax request na server
+            method: 'POST',                                   // request je POST typu -> bude na server posielat volaco
+            headers: {'Content-Type': 'application/json'},    // telo requestu bude obsahovat json data
+            body: JSON.stringify({ query: query })      // telo requestu je json str toho query resultu (stringify ho skonvertuje do formatu pre server)
+        })
+            .then(response => response.json())      // spracuje odpoved od serveru -> pretipuje ju na json
+            .then(data => {                                   //  filtrovane lety
+                tableBody.innerHTML = '';
 
-            const origin = originCell.textContent.toLowerCase();
-            const destination = destinationCell.textContent.toLowerCase();
+                data.flights.forEach(flight => {
+                    const row = document.createElement('tr');
 
-            if (origin.includes(query) || destination.includes(query)) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
+                    const originCell = document.createElement('td');
+                    originCell.textContent = flight.origin;
+                    const destinationCell = document.createElement('td');
+                    destinationCell.textContent = flight.destination;
+
+                    row.appendChild(originCell);
+                    row.appendChild(destinationCell);
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Error getting the filtered flight data from servr', error);
+            });
     });
 });

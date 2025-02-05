@@ -56,7 +56,7 @@ class UserController extends AControllerBase
 
             $user->save();
 
-            if (!$id > 0)
+            if ($_SESSION['user'] == null)
                 $_SESSION['user'] = $user->getId();
 
             return new RedirectResponse($this->url("home.index"));
@@ -116,7 +116,9 @@ class UserController extends AControllerBase
         } elseif (!filter_var($this->request()->getValue('email'), FILTER_VALIDATE_EMAIL)) {
             $errors[] = "Invalid email format.";
         }
-
+        if (empty($this->request()->getValue('name'))) {
+            $errors[] = "Please input your name.";
+        }
         return $errors;
     }
 }
