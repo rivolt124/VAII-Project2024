@@ -3,6 +3,9 @@
 /** @var Array $data */
 /** @var \App\Models\Schedule $schedules */
 /** @var \App\Core\LinkGenerator $link */
+
+use App\Models\Flight;
+use App\Models\Airport;
 ?>
 <link rel="stylesheet" href="../../../public/css/crud.css">
 
@@ -35,8 +38,11 @@
                     <tr>
                         <td><?= $schedule->getFlightNumber()?></td>
                         <td><?= $schedule->getDate() ?></td>
-                        <td>To Do</td>
-                        <td>To Do</td>
+                        <?php $flight = Flight::getAll('`flight_number` LIKE ?', [$schedule->getFlightNumber()], limit: 1); ?>
+                        <?php $airportFrom = Airport::getAll('`IATA` LIKE ?', [$flight[0]->getOrigin()], limit: 1); ?>
+                        <?php $airportTo = Airport::getAll('`IATA` LIKE ?', [$flight[0]->getDestination()], limit: 1); ?>
+                        <td><?=$airportFrom[0]->getAirportName()?></td>
+                        <td><?=$airportTo[0]->getAirportName()?></td>
                         <td>
                             <?php if ($auth->getUserAccess() == 1): ?>
                                 <a href="<?= $link->url('schedule.edit', ['id' => $schedule->getId()]) ?>" class="btn btn-primary btn-sm border-0">Edit</a>

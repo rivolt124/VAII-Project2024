@@ -31,6 +31,7 @@ $showFooter = $showFooter ?? true;
             <ul class="navbar-nav ms-auto">
                 <?php if ($auth->isLogged()): ?>
                     <li class="nav-item"><a class="nav-link" href="<?= $link->url("schedule.index") ?>">Schedules</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= $link->url("ticket.index") ?>">Tickets</a></li>
                     <?php if ($auth->getUserAccess() == 1): ?>
                         <li class="nav-item"><a class="nav-link" href="<?= $link->url("flight.index") ?>">Flights</a></li>
                         <li class="nav-item"><a class="nav-link" href="<?= $link->url("airplane.index") ?>">Airplanes</a></li>

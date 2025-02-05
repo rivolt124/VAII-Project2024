@@ -15,8 +15,7 @@
         <?php endif; ?>
         <?php if ($auth->isLogged()): ?>
             <a href="<?= $link->url("auth.logout") ?>" id="logoutJava" class="btn btn-outline-danger mt-2">Logout</a>
-            <a href="..." class="btn btn-outline-danger mt-2" >Delete Account</a>
-            <a href="..." class="btn btn-outline-danger mt-2" >Remove Passport</a>
+            <a href="<?= $link->url('user.edit', ['id' => $auth->getLoggedUserId()]) ?>" class="btn btn-outline-danger mt-2" >Edit Account</a>
         <?php endif; ?>
     </div>
 

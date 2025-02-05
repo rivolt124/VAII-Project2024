@@ -52,9 +52,12 @@ class UserController extends AControllerBase
             $user->setPassword($this->request()->getValue('password'));
             $user->setEmail($this->request()->getValue('email'));
             $user->setName($this->request()->getValue('name'));
-            $user->setAccess(0);
+            $user->setAccess($this->request()->getValue('access') ? $this->request()->getValue('access') : 0);
 
             $user->save();
+
+            if (!$id > 0)
+                $_SESSION['user'] = $user->getId();
 
             return new RedirectResponse($this->url("home.index"));
         }
@@ -92,10 +95,10 @@ class UserController extends AControllerBase
         $id = (int) $this->request()->getValue('id');
         $user = User::getOne($id);
 
-        if (is_null($user)) {
+        if (is_null($user) ||$user->getAccess() == 1) {
             throw new HTTPException(404);
         } else {
-            FileStorage::deleteFile($user->getEmail());
+            FileStorage::deleteFile($user->getId());
             $user->delete();
             return new RedirectResponse($this->url("user.index"));
         }
@@ -113,14 +116,6 @@ class UserController extends AControllerBase
         } elseif (!filter_var($this->request()->getValue('email'), FILTER_VALIDATE_EMAIL)) {
             $errors[] = "Invalid email format.";
         }
-        //if (empty($this->request()->getValue('name'))) {
-        //    $errors[] = "Name is required.";
-        //}
-        //if (empty($this->request()->getValue('access')) && $this->request()->getValue('access') !== '0') {
-        //    $errors[] = "Access level is required.";
-        //} elseif (!is_numeric($this->request()->getValue('access'))) {
-        //    $errors[] = "Access level must be a number.";
-        //}
 
         return $errors;
     }

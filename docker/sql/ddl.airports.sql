@@ -63,4 +63,5 @@ VALUES
     ('YVR', 'Vancouver International', 'CA'),
     ('MEL', 'Melbourne Tullamarine', 'AU'),
     ('WAW', 'Warsaw Chopin', 'PL'),
-    ('CPT', 'Cape Town International', 'ZA');
+    ('CPT', 'Cape Town International', 'ZA'),
+    ('DFW', 'Dallas/Fort Worth International', 'US');
