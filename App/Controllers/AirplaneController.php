@@ -113,6 +113,11 @@ class AirplaneController extends AControllerBase
             $errors[] = "Obrazok musi byt validne URL!";
         }
 
+        $airplanes = Airplane::getAll();
+        foreach ($airplanes as $airplane)
+            if ($airplane->getRegistration() == $this->request()->getValue('registration'))
+                $errors[] = "Lietadlo uz je registrovane!";
+
         return $errors;
     }
 
