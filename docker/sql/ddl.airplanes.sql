@@ -11,7 +11,7 @@ CREATE TABLE `airplanes`
     `id`            INT                 NOT NULL AUTO_INCREMENT,
     `registration`  VARCHAR(10)         NOT NULL,
     `type`          CHAR(4)             NOT NULL,
-    `picture`       VARCHAR(200)        NOT NULL,
+    `picture`       VARCHAR(200)        NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `registration_unique` (`registration`)
 ) ENGINE = InnoDB

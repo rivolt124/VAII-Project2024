@@ -42,7 +42,11 @@ use App\Models\Airport;
                         <?php $airportFrom = Airport::getAll('`IATA` LIKE ?', [$flight[0]->getOrigin()], limit: 1); ?>
                         <?php $airportTo = Airport::getAll('`IATA` LIKE ?', [$flight[0]->getDestination()], limit: 1); ?>
                         <td><?=$airportFrom[0]->getAirportName()?></td>
-                        <td><?=$airportTo[0]->getAirportName()?></td>
+                        <?php if($airportTo[0] != null): ?>
+                            <td><?=$airportTo[0]->getAirportName()?></td>
+                        <?php else: ?>
+                            <td>N/A</td>
+                        <?php endif; ?>
                         <td>
                             <?php if ($auth->getUserAccess() == 1): ?>
                                 <a href="<?= $link->url('schedule.edit', ['id' => $schedule->getId()]) ?>" class="btn btn-primary btn-sm border-0">Edit</a>

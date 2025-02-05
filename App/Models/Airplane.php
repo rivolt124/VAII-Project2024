@@ -10,7 +10,7 @@ class Airplane extends Model
     protected int $id;
     protected string $registration;
     protected string $type;
-    protected string $picture;
+    protected ?string $picture;
 
     public function getId(): int
     {
@@ -42,12 +42,12 @@ class Airplane extends Model
         $this->type = $type;
     }
 
-    public function getPicture(): string
+    public function getPicture(): ?string
     {
         return $this->picture;
     }
 
-    public function setPicture(string $picture): void
+    public function setPicture(?string $picture): void
     {
         $this->picture = $picture;
     }

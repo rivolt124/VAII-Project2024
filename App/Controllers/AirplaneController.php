@@ -47,8 +47,7 @@ class AirplaneController extends AControllerBase
             // Set flight properties from the request
             $airplane->setRegistration($this->request()->getValue('registration'));
             $airplane->setType($this->request()->getValue('type'));
-            $picture = $this->request()->getValue('picture');
-            $airplane->setPicture($picture ? $picture : "../../public/images/vaiicko_logo.png");
+            $airplane->setPicture($this->request()->getValue('picture') ?: "../../public/images/vaiicko_logo.png");
 
             $airplane->save();
 
@@ -79,7 +78,7 @@ class AirplaneController extends AControllerBase
 
         return $this->html(
             [
-                'airplanes' => $airplane
+                'airplane' => $airplane
             ]
         );
     }
@@ -101,6 +100,20 @@ class AirplaneController extends AControllerBase
     {
         $errors = [];
 
+        if (!preg_match('/^[A-Z0-9]{3,10}$/', $this->request()->getValue('registration'))) {
+            $errors[] = "Registracia musi mat pismena, cisla a len uppercase!";
+        }
+        if (strlen($this->request()->getValue('type')) != 4) {
+            $errors[] = "Type musi byt aspon 4 znaky dlhy!";
+        } elseif (!preg_match("/^[A-Z0-9]+$/", $this->request()->getValue('type')))
+            $errors[] = "Type môže pozostávať len z veľkych písmen!";
+
+        $picture = $this->request()->getValue('picture');
+        if ($picture && !filter_var($picture, FILTER_VALIDATE_URL)) {
+            $errors[] = "Obrazok musi byt validne URL!";
+        }
+
         return $errors;
     }
+
 }
