@@ -30,12 +30,6 @@ interface IAuthenticator
     public function getUserAccess(): int;
 
     /**
-     * Return name of a logged user
-     * @return string
-     */
-    public function getLoggedUserName();
-
-    /**
      * Return id of a logged user
      * @return mixed
      */

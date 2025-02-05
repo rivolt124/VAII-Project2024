@@ -10,7 +10,7 @@ class Ticket extends Model
     protected int $id;
     protected int $ticket_number;
     protected string $flight_number;
-    protected int $passport_id;
+    protected int $passenger_id;
 
     public function getId(): int
     {
@@ -42,13 +42,13 @@ class Ticket extends Model
         $this->flight_number = $flight_number;
     }
 
-    public function getPassportId(): int
+    public function getPassengerId(): int
     {
-        return $this->passport_id;
+        return $this->passenger_id;
     }
 
-    public function setPassportId(int $passport_id): void
+    public function setPassengerId(int $passenger_id): void
     {
-        $this->passport_id = $passport_id;
+        $this->passenger_id = $passenger_id;
     }
 }

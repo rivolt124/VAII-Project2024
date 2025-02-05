@@ -75,16 +75,6 @@ class DummyAuthenticator implements IAuthenticator
         return User::getOne($this->getLoggedUserId())->getAccess();
     }
 
-    public function getLoggedUserName()
-    {
-        if (!isset($_SESSION['user']))
-            return null;
-
-        $user = User::getOne($_SESSION['user']);
-
-        return $user->getName();
-    }
-
     public function isLogged(): bool
     {
         return isset($_SESSION['user']) && $_SESSION['user'] != null;
