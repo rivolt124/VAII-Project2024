@@ -59,7 +59,10 @@ class UserController extends AControllerBase
             if ($_SESSION['user'] == null)
                 $_SESSION['user'] = $user->getId();
 
-            return new RedirectResponse($this->url("home.index"));
+            if ($this->app->getAuth()->getUserAccess() == 1)
+                return new RedirectResponse($this->url("user.index"));
+            else
+                return new RedirectResponse($this->url("home.index"));
         }
         catch (\PDOException $e) {
 
@@ -98,9 +101,15 @@ class UserController extends AControllerBase
         if (is_null($user) ||$user->getAccess() == 1) {
             throw new HTTPException(404);
         } else {
+            $auth = $this->app->getAuth();
+            if($auth->getLoggedUserId() == $id)
+               $auth->logout();
             FileStorage::deleteFile($user->getId());
             $user->delete();
-            return new RedirectResponse($this->url("user.index"));
+            if ($auth->getUserAccess() == 1)
+                return new RedirectResponse($this->url("user.index"));
+            else
+                return new RedirectResponse($this->url("home.index"));
         }
     }
 

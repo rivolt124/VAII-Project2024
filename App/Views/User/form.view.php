@@ -1,3 +1,6 @@
+<?php
+/** @var \App\Core\IAuthenticator $auth */
+?>
 <?php if (!is_null(@$data['errors'])): ?>
     <?php foreach ($data['errors'] as $error): ?>
         <div class="alert alert-danger" role="alert">
@@ -21,8 +24,16 @@
     <div class="input-group has-validation mb-3 ">
         <textarea class="form-control" aria-label="With textarea" name="name" id="post-text"><?= @$data['user']?->getName() ?></textarea>
     </div>
+    <?php if($auth->getUserAccess() == 1 && $auth->getLoggedUserId() != @$data['user']?->getId()): ?>
+        <label for="access" class="form-label">Access</label>
+        <div class="input-group has-validation mb-3 ">
+            <textarea class="form-control" aria-label="With textarea" name="access" id="post-text"><?= @$data['user']?->getAccess() ?></textarea>
+        </div>
+    <?php endif; ?>
 
-
-    <button type="submit" class="btn btn-primary">Register</button>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <?php if($auth->isLogged() && $auth->getUserAccess() == 0): ?>
+        <button type="button" class="btn btn-danger" onclick="if (confirm('Are you sure you want to delete your account?')) { location.href='<?= $link->url('user.delete', ['id' => @$data['user']?->getId()]) ?>'; }">Delete</button>
+    <?php endif; ?>
     <button type="button" class="btn btn-secondary" onclick="location.href='<?= $link->url("home.index") ?>'">Return</button>
 </form>
