@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Assuming you have a button or form for buying a ticket
     const buyTicketButtons = document.querySelectorAll('.buy-ticket-btn');
 
     buyTicketButtons.forEach(button => {
@@ -7,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
 
             const flightNumber = button.getAttribute('data-flight-number');
-            // Example: Make an AJAX request to handle the ticket purchase
             fetch('/?c=ticket&a=buy', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -18,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log(data);
                 if (data.success) {
                     alert("Ticket successfully purchased!");
-                    // Optionally, you could reload the page or update the ticket list dynamically
                 } else {
                     alert("There was an issue purchasing the ticket.");
                 }
