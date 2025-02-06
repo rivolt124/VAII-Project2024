@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
 use App\Models\Schedule;
+use App\Models\Flight;
 use App\Core\HTTPException;
 use App\Helpers\FileStorage;
 use App\Core\Responses\RedirectResponse;
@@ -45,7 +46,7 @@ class ScheduleController extends AControllerBase
             else
                 $schedule = new Schedule();
 
-            $schedule->setFlightNumber($this->request()->getValue('flightNumber'));
+            $schedule->setFlightNumber(strtoupper($this->request()->getValue('flightNumber')));
             $schedule->setDate($this->request()->getValue('date'));
 
             $schedule->save();
@@ -69,15 +70,15 @@ class ScheduleController extends AControllerBase
     public function edit(): Response
     {
         $id = (int) $this->request()->getValue('id');
-        $user = User::getOne($id);
+        $schedule = Schedule::getOne($id);
 
-        if (is_null($user)) {
+        if (is_null($schedule)) {
             throw new HTTPException(404);
         }
 
         return $this->html(
             [
-                'user' => $user
+                'schedule' => $schedule
             ]
         );
     }
@@ -99,16 +100,19 @@ class ScheduleController extends AControllerBase
     {
         $errors = [];
 
-        if (empty($this->request()->getValue('flightNumber'))) {
-            $errors[] = "Flight number is required.";
+        $flights = Flight::getAll('`flight_number` LIKE ?', [$this->request()->getValue('flightNumber')]);
+        if (empty($flights))
+            $errors[] = "That flight doesn't exist";
+
+        $date = DateTime::createFromFormat('Y-m-d', $this->request()->getValue('date'));
+        if (!$date || $date->format('Y-m-d') !== $this->request()->getValue('date')) {
+            $errors[] = "Invalid date format.";
         }
-        if (empty($this->request()->getValue('date'))) {
-            $errors[] = "Date is required.";
-        } else {
-            $date = DateTime::createFromFormat('Y-m-d', $this->request()->getValue('date'));
-            if (!$date || $date->format('Y-m-d') !== $this->request()->getValue('date')) {
-                $errors[] = "Invalid date format.";
-            }
+
+        $schedule = Schedule::getAll();
+        foreach ($schedule as $s) {
+            if ($s->getFlightNumber() === $this->request()->getValue('flightNumber') && $s->getDate() === $this->request()->getValue('date'))
+                $errors[] = "Flight is already scheduled!";
         }
 
         return $errors;
