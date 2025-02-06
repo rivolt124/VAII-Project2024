@@ -15,24 +15,31 @@ use App\Models\User;
         </div>
     </div>
     <div class="row justify-content-center" id="ticketList">
-        <?php foreach ($data['tickets'] as $ticket): ?>
-            <div class="col-md-2 text-center mb-5">
-                <div class="ticket-card shadow">
-                    <div class="ticket-header">
-                        <h5><?= $ticket->getTicketNumber() ?></h5>
-                    </div>
-                    <div class="ticket-body">
-                        <p><strong>Flight:</strong> <?= $ticket->getFlightNumber() ?></p>
-                        <p><strong>Passenger:</strong> <?= User::getOne($ticket->getPassengerId())->getName(); ?></p>
-                    </div>
-                    <div class="ticket-footer d-flex justify-content-center gap-2">
-                        <a href="<?= $link->url('ticket.download', ['id' => $ticket->getId()]) ?>" class="btn btn-primary btn-sm">Export to HTML</a>
-                        <a href="<?= $link->url('ticket.delete', ['id' => $ticket->getId()]) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this ticket?');">Delete</a>
+        <?php if (empty($data['tickets'])): ?>
+            <div class="col-12 text-center">
+                <p>You currently have no tickets</p>
+            </div>
+        <?php else: ?>
+            <?php foreach ($data['tickets'] as $ticket): ?>
+                <div class="col-md-2 text-center mb-5">
+                    <div class="ticket-card shadow">
+                        <div class="ticket-header">
+                            <h5><?= $ticket->getTicketNumber() ?></h5>
+                        </div>
+                        <div class="ticket-body">
+                            <p><strong>Flight:</strong> <?= $ticket->getFlightNumber() ?></p>
+                            <p><strong>Passenger:</strong> <?= User::getOne($ticket->getPassengerId())->getName(); ?></p>
+                        </div>
+                        <div class="ticket-footer d-flex justify-content-center gap-2">
+                            <a href="<?= $link->url('ticket.download', ['id' => $ticket->getId()]) ?>" class="btn btn-primary btn-sm">Export to HTML</a>
+                            <a href="<?= $link->url('ticket.delete', ['id' => $ticket->getId()]) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this ticket?');">Delete</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 </div>
+
 
 

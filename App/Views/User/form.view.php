@@ -39,4 +39,7 @@
     <?php if($auth->isLogged() && $auth->getUserAccess() == 1): ?>
         <button type="button" class="btn btn-secondary" onclick="location.href='<?= $link->url("user.index") ?>'">Return</button>
     <?php endif; ?>
+    <?php if(!$auth->isLogged()): ?>
+        <button type="button" class="btn btn-secondary" onclick="location.href='<?= $link->url("home.index") ?>'">Return</button>
+    <?php endif; ?>
 </form>

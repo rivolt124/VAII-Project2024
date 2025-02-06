@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 console.log(data);
                 if (data.success) {
-                    alert("Ticket successfully purchasedzxczxc!");
+                    alert("Ticket successfully purchased!");
                     // Optionally, you could reload the page or update the ticket list dynamically
                 } else {
                     alert("There was an issue purchasing the ticket.");
