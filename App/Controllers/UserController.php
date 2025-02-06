@@ -65,7 +65,7 @@ class UserController extends AControllerBase
             else
                 $user = new User();
 
-            $user->setPassword($this->request()->getValue('password'));
+            $user->setPassword(password_hash($this->request()->getValue('password'), PASSWORD_DEFAULT));
             $user->setEmail($this->request()->getValue('email'));
             $user->setName($this->request()->getValue('name'));
             $user->setAccess($this->request()->getValue('access') ? $this->request()->getValue('access') : 0);
