@@ -33,7 +33,7 @@ $showFooter = false;
                         </div>
                     </form>
                     <div class="text-center">
-                        <button class="btn btn-secondary" onclick="history.back()">Return</button>
+                        <button class="btn btn-secondary" onclick="location.href='<?= $link->url("home.index") ?>'">Return</button>
                     </div>
                 </div>
             </div>
