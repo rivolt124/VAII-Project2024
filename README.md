@@ -1,27 +1,20 @@
-# O tomto frameworku
+# VAII-Project2024
+Tento projekt predstavuje moju semestrálnu prácu z predmetu VAII (vývoj aplikácií pre internet a intranet). Predstavuje webovú aplikáciu leteckej spoločnosti, ktorá ponúka možnosť zakúpenia si leteniek na rôzne lety.
+Projekt je postavený na Frameworku [Vaiiko](https://github.com/thevajko/vaiicko).
 
-Tento framework vznikol na podporu výučby predmetu Vývoj aplikácií pre intranet a intrenate (VAII)
-na [Fakulte informatiky a riadenia](https://www.fri.uniza.sk/) [Žilinskej univerzity v Žiline](https://www.uniza.sk/). Framework je navrhnutý tak, aby bol čo
-najmenší a najjednoduchší.
+## Návod na lokálne spustenie
+Na použitie webovej aplikácie je potrebené mať Docker [Docker Desktop](https://www.docker.com) a vývojové prostredie pre jazyk PHP [PhpStorm](https://www.jetbrains.com/phpstorm/).
 
-# Návod a dokumentácia
+## 1. Stiahnutie repozitára
+```git clone github.com/rivolt124/VAII-Project2024.git```.
 
-Kód frameworku je kompletne okomentovaný. V prípade, že na pochopenie potrebujete dodatočné informácie,
-navštívte [WIKI stránky](https://github.com/thevajko/vaiicko/wiki).
+## 2. Spustenie 
+1. Spustenie Dockeru.
+2. Otvorenie a spustenie súboru ```docker-compose.yml```.
+3. Po úspešnom spustení by sa mali v Dockery v sekcii Containers objaviť položka [vymazal_project]:
+    - adminer-1 - spravovanie databázy
+    - db-1 - databáza
+    - web-1 - stránka
 
-# Docker
-
-Framework ma v adresári `<root>/docker` základnú konfiguráciu pre spustenie a debug web aplikácie. Všetky potrebné služby sú v `docker-compose.yml`. Po ich spustení sa vytvorí:
-
-- __WWW document root__ je nastavený adresár riešenia, čiže web bude dostupný na adrese [http://localhost/](http://localhost/). Server má pridaný modul pre
-  ladenie móde" (`xdebug.start_with_request=yes`).
-- webový server beží na __PHP 8.2__ s [__Xdebug 3__](https://xdebug.org/) nastavený na port __9003__ v "auto-štart" móde
-- PHP ma doinštalované rozšírenie __PDO__
-- databázový server s vytvorenou _databázou_ a tabuľkami `messages` a `users` na porte __3306__ a bude dostupný na `localhost:3306`. Prihlasovacie údaje sú:
-    - MYSQL_ROOT_PASSWORD: db_user_pass
-    - MYSQL_DATABASE: databaza
-    - MYSQL_USER: db_user
-    - MYSQL_PASSWORD: db_user_pass
-- phpmyadmin server, ktorý sa automatický nastavený na databázový server na porte __8080__ a bude dostupný na
-  adrese [http://localhost:8080/](http://localhost:8080/)
-
+## Problém s databázou
+Ak by nastali dáke problémy, v priečinku ```/docker/sql``` sa nachádzajú tabuľky spolu s dátamy.
