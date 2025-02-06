@@ -16,7 +16,7 @@ use App\Models\User;
     </div>
     <div class="row justify-content-center" id="ticketList">
         <?php foreach ($data['tickets'] as $ticket): ?>
-            <div class="col-md-2 text-center">
+            <div class="col-md-2 text-center mb-5">
                 <div class="ticket-card shadow">
                     <div class="ticket-header">
                         <h5><?= $ticket->getTicketNumber() ?></h5>

@@ -13,7 +13,7 @@ CREATE TABLE `schedules`
     `date`          date                NOT NULL DEFAULT '0000-00-00',
     PRIMARY KEY (`id`),
     UNIQUE KEY `flight_date_unique` (`flight_number`, `date`),
-    CONSTRAINT `fk_flight_number` FOREIGN KEY (`flight_number`) REFERENCES `flights` (`flight_number`) ON DELETE CASCADE
+    CONSTRAINT `fk_flight_number` FOREIGN KEY (`flight_number`) REFERENCES `flights` (`flight_number`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
 

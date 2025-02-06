@@ -15,9 +15,9 @@ CREATE TABLE `flights`
     `airplane`      VARCHAR(10)     DEFAULT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `flight_number_unique` (`flight_number`),
-    CONSTRAINT `fk_origin` FOREIGN KEY (`origin`) REFERENCES `airports` (`IATA`),
-    CONSTRAINT `fk_destination` FOREIGN KEY (`destination`) REFERENCES `airports` (`IATA`),
-    CONSTRAINT `fk_airplane` FOREIGN KEY (`airplane`) REFERENCES `airplanes` (`registration`)
+    CONSTRAINT `fk_origin` FOREIGN KEY (`origin`) REFERENCES `airports` (`IATA`) ON UPDATE CASCADE,
+    CONSTRAINT `fk_destination` FOREIGN KEY (`destination`) REFERENCES `airports` (`IATA`) ON UPDATE CASCADE,
+    CONSTRAINT `fk_airplane` FOREIGN KEY (`airplane`) REFERENCES `airplanes` (`registration`) ON UPDATE CASCADE
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
 
