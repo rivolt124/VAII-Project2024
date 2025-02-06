@@ -15,6 +15,10 @@ use DateTime;
 
 class TicketController extends AControllerBase
 {
+    public function authorize($action)
+    {
+        return $this->app->getAuth()->isLogged();
+    }
     public function index(): Response
     {
         $auth = $this->app->getAuth();

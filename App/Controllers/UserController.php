@@ -11,6 +11,21 @@ use App\Core\Responses\RedirectResponse;
 
 class UserController extends AControllerBase
 {
+    public function authorize($action)
+    {
+        switch ($action) {
+            case 'index':
+            case 'add':
+            case 'delete':
+            case 'save':
+            case 'edit':
+                return $this->app->getAuth()->isLogged() && $this->app->getAuth()->getUserAccess() == 1;
+            case 'register':
+                return !$this->app->getAuth()->isLogged();
+            default:
+                return false;
+        }
+    }
     public function index(): Response
     {
         return $this->html(

@@ -13,6 +13,20 @@ use DateTime;
 
 class ScheduleController extends AControllerBase
 {
+    public function authorize($action)
+    {
+        switch ($action) {
+            case 'index':
+                return $this->app->getAuth()->isLogged();
+            case 'add':
+            case 'delete':
+            case 'save':
+            case 'edit':
+                return $this->app->getAuth()->isLogged() && $this->app->getAuth()->getUserAccess() == 1;
+            default:
+                return false;
+        }
+    }
     public function index(): Response
     {
         return $this->html(

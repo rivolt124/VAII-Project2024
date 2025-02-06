@@ -57,7 +57,7 @@ $showFooter = $showFooter ?? true;
     <footer class="footer text-center mt-auto bg-dark text-white py-4">
         <div class="container">
             <p>UNIZA TRAVEL</p>
-            <p>&copy; 2024 UNIZA TRAVEL. All rights reserved.</p>
+            <p>&copy; 2025 UNIZA TRAVEL. All rights reserved.</p>
         </div>
     </footer>
 <?php endif; ?>

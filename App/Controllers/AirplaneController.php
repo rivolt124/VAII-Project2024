@@ -12,6 +12,19 @@ use App\Core\Responses\RedirectResponse;
 
 class AirplaneController extends AControllerBase
 {
+    public function authorize($action)
+    {
+        switch ($action) {
+            case 'index':
+            case 'add':
+            case 'save':
+            case 'delete':
+            case 'edit':
+                return $this->app->getAuth()->isLogged() && $this->app->getAuth()->getUserAccess() == 1;
+            default:
+                return false;
+        }
+    }
     public function index(): Response
     {
         return $this->html(
