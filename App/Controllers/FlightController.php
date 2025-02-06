@@ -3,9 +3,10 @@
 namespace App\Controllers;
 
 use App\Core\AControllerBase;
+use App\Core\Request;
+use App\Core\Responses\JsonResponse;
 use App\Core\Responses\Response;
 use App\Models\Flight;
-use App\Models\Airplane;
 use App\Core\HTTPException;
 use App\Helpers\FileStorage;
 use App\Core\Responses\RedirectResponse;
@@ -125,4 +126,23 @@ class FlightController extends AControllerBase
         }
         return $errors;
     }
+
+    public function searchFlights(): JsonResponse
+    {
+        $request = $this->request();
+        if ($request->isContentTypeJSON())
+        {
+            $data = $request->getPost();
+
+            $flights = Flight::getAll();
+            $result = [];
+            foreach ($flights as $flight)
+                if (stripos($flight->getOrigin(), $data['query']) !== false || stripos($flight->getDestination(), $data['query']) !== false)
+                    $result[] = $flight;
+        }
+
+        return new JsonResponse(['flights' => $result]);
+
+    }
+
 }

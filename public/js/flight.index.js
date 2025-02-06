@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     searchInput.addEventListener('input', function () {
         const query = searchInput.value.toUpperCase();
 
-        fetch('/search-flights', {                  // posle ajax request na server
+        fetch('/?c=flight&a=searchFlights', {                  // posle ajax request na server
             method: 'POST',                                   // request je POST typu -> bude na server posielat volaco
             headers: {'Content-Type': 'application/json'},    // telo requestu bude obsahovat json data
             body: JSON.stringify({ query: query })      // telo requestu je json str toho query resultu (stringify ho skonvertuje do formatu pre server)
