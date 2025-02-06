@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Core\AControllerBase;
+use App\Core\Responses\JsonResponse;
 use App\Core\Responses\Response;
 use App\Models\Ticket;
 use App\Models\Schedule;
@@ -24,24 +25,33 @@ class TicketController extends AControllerBase
         ]);
     }
 
-    public function buy(): Response
+    public function buy() :JsonResponse
     {
-        $flight_number = $this->request()->getValue('flight_number');
-        $tickets = Ticket::getAll();
-        $newTicketNum = rand(1000, 9999);
-        foreach ($tickets as $ticket) {
-            if ($ticket->getTicketNumber() == $newTicketNum) {
-                return new RedirectResponse($this->url("schedule.index"));
+        $request = $this->request();
+        if ($request->isContentTypeJSON())
+        {
+            $data = $request->getRawBodyJSON();
+            if (isset($data->flight_number))
+            {
+                $tickets = Ticket::getAll();
+                $newTicketNum = rand(1000, 9999);
+                foreach ($tickets as $ticket) {
+                    if ($ticket->getTicketNumber() == $newTicketNum) {
+                        $_SESSION['ticket_purchase_success'] = false;
+                        return new JsonResponse(['success' => false]);
+                    }
+                }
+                $auth = $this->app->getAuth();
+                $newTicket = new Ticket();
+                $newTicket->setTicketNumber($newTicketNum);
+                $newTicket->setPassengerId($auth->getLoggedUserId());
+                $newTicket->setFlightNumber($data->flight_number);
+
+                $newTicket->save();
+                $_SESSION['ticket_purchase_success'] = true;
             }
         }
-        $auth = $this->app->getAuth();
-        $newTicket = new Ticket();
-        $newTicket->setTicketNumber($newTicketNum);
-        $newTicket->setPassengerId($auth->getLoggedUserId());
-        $newTicket->setFlightNumber($flight_number);
-
-        $newTicket->save();
-        return new RedirectResponse($this->url("schedule.index"));
+        return new JsonResponse(['success' => true]);
     }
 
     public function download()

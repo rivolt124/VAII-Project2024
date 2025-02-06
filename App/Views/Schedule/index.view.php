@@ -8,6 +8,7 @@ use App\Models\Flight;
 use App\Models\Airport;
 ?>
 <link rel="stylesheet" href="../../../public/css/crud.css">
+<script src="../../../public/js/schedule.index.js"></script>
 
 <div class="container-fluid">
     <div class="row mb-4 pt-4">
@@ -52,7 +53,7 @@ use App\Models\Airport;
                                 <a href="<?= $link->url('schedule.edit', ['id' => $schedule->getId()]) ?>" class="btn btn-primary btn-sm border-0">Edit</a>
                                 <a href="<?= $link->url('schedule.delete', ['id' => $schedule->getId()]) ?>" class="btn btn-danger btn-sm border-0" onclick="return confirm('Are you sure you want to cancel the scheduling of this flight?');">Delete</a>
                             <?php else: ?>
-                                <a href="<?= $link->url('ticket.buy', ['flight_number' => $schedule->getFlightNumber()]) ?>" class="btn btn-primary btn-sm border-0">Buy a ticket</a>
+                                <a href="#" class="btn btn-primary btn-sm buy-ticket-btn" data-flight-number="<?= $schedule->getFlightNumber() ?>">Buy a ticket</a>
                             <?php endif; ?>
                         </td>
                     </tr>
