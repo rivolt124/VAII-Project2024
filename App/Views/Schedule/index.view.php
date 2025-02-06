@@ -29,8 +29,8 @@ use App\Models\Airport;
                 <tr>
                     <th>Flight Number</th>
                     <th>Date</th>
-                    <th>Departing</th>
-                    <th>Arriving</th>
+                    <th>Origin</th>
+                    <th>Destination</th>
                     <th class="actions-column"></th>
                 </tr>
                 </thead>
