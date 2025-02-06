@@ -24,13 +24,14 @@ class TicketController extends AControllerBase
         ]);
     }
 
-    public function buy($flight_number): bool
+    public function buy(): Response
     {
+        $flight_number = $this->request()->getValue('flight_number');
         $tickets = Ticket::getAll();
         $newTicketNum = rand(1000, 9999);
         foreach ($tickets as $ticket) {
             if ($ticket->getTicketNumber() == $newTicketNum) {
-                return false;
+                return new RedirectResponse($this->url("schedule.index"));
             }
         }
         $auth = $this->app->getAuth();
@@ -40,7 +41,7 @@ class TicketController extends AControllerBase
         $newTicket->setFlightNumber($flight_number);
 
         $newTicket->save();
-        return true;
+        return new RedirectResponse($this->url("schedule.index"));
     }
 
     public function download()

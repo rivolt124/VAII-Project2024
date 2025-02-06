@@ -15,7 +15,7 @@ CREATE TABLE `tickets`
     PRIMARY KEY (`id`),
     UNIQUE KEY `ticket_number_unique` (`ticket_number`),
     CONSTRAINT `fk_ticket_flight` FOREIGN KEY (`flight_number`) REFERENCES `flights` (`flight_number`) ON DELETE CASCADE,
-    CONSTRAINT `fk_passenger` FOREIGN KEY (`id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+    CONSTRAINT `fk_passenger` FOREIGN KEY (`passenger_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
 

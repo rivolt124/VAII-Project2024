@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Core\AControllerBase;
-use App\Core\Request;
 use App\Core\Responses\JsonResponse;
 use App\Core\Responses\Response;
 use App\Models\Flight;
@@ -103,17 +102,13 @@ class FlightController extends AControllerBase
     {
         $errors = [];
 
-        if ($this->request()->getValue('flight_number') == "") {
-            $errors[] = "Pole Číslo letu musí byť vyplnené!";
-        } elseif (!preg_match("/^[A-Z0-9]+$/", $this->request()->getValue('flight_number'))) {
+        if (!preg_match("/^[A-Z0-9]+$/", $this->request()->getValue('flight_number'))) {
             $errors[] = "Číslo letu musí obsahovať iba veľké písmená a čísla!";
         } elseif (strlen($this->request()->getValue('flight_number')) > 6) {
             $errors[] = "Číslo letu môže mať maximálne 6 znakov!";
         }
 
-        if ($this->request()->getValue('origin') == "") {
-            $errors[] = "Origin musí byť zadefinovaný!";
-        } elseif (!preg_match("/^[A-Z]+$/", $this->request()->getValue('origin'))) {
+        if (!preg_match("/^[A-Z]+$/", $this->request()->getValue('origin'))) {
             $errors[] = "Origin môže pozostávať len z veľkych písmen";
         } elseif (strlen($this->request()->getValue('origin')) > 3) {
             $errors[] = "Origin môže môže mať maximálne 3 znakov!";
@@ -142,7 +137,6 @@ class FlightController extends AControllerBase
                         $result[] = $flight;
             }
         }
-
         return new JsonResponse(['flights' => $result]);
     }
 

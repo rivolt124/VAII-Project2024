@@ -97,6 +97,7 @@ class UserController extends AControllerBase
     {
         $id = (int) $this->request()->getValue('id');
         $user = User::getOne($id);
+        $access = $user->getAccess();
 
         if (is_null($user) ||$user->getAccess() == 1) {
             throw new HTTPException(404);
@@ -106,7 +107,7 @@ class UserController extends AControllerBase
                $auth->logout();
             FileStorage::deleteFile($user->getId());
             $user->delete();
-            if ($auth->getUserAccess() == 1)
+            if ($access == 1)
                 return new RedirectResponse($this->url("user.index"));
             else
                 return new RedirectResponse($this->url("home.index"));
@@ -127,6 +128,10 @@ class UserController extends AControllerBase
         }
         if (empty($this->request()->getValue('name'))) {
             $errors[] = "Please input your name.";
+        }
+        $access = $this->request()->getValue('access');
+        if ($access != 0 && $access != 1) {
+            $errors[] = "Invalid access level!";
         }
         return $errors;
     }

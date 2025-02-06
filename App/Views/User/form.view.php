@@ -24,7 +24,7 @@
     <div class="input-group has-validation mb-3 ">
         <textarea class="form-control" aria-label="With textarea" name="name" id="post-text"><?= @$data['user']?->getName() ?></textarea>
     </div>
-    <?php if($auth->getUserAccess() == 1 && $auth->getLoggedUserId() != @$data['user']?->getId()): ?>
+    <?php if($auth->isLogged() && $auth->getUserAccess() == 1 && $auth->getLoggedUserId() != @$data['user']?->getId()): ?>
         <label for="access" class="form-label">Access</label>
         <div class="input-group has-validation mb-3 ">
             <textarea class="form-control" aria-label="With textarea" name="access" id="post-text"><?= @$data['user']?->getAccess() ?></textarea>
@@ -34,6 +34,9 @@
     <button type="submit" class="btn btn-primary">Save</button>
     <?php if($auth->isLogged() && $auth->getUserAccess() == 0): ?>
         <button type="button" class="btn btn-danger" onclick="if (confirm('Are you sure you want to delete your account?')) { location.href='<?= $link->url('user.delete', ['id' => @$data['user']?->getId()]) ?>'; }">Delete</button>
+        <button type="button" class="btn btn-secondary" onclick="location.href='<?= $link->url("home.index") ?>'">Return</button>
     <?php endif; ?>
-    <button type="button" class="btn btn-secondary" onclick="location.href='<?= $link->url("home.index") ?>'">Return</button>
+    <?php if($auth->isLogged() && $auth->getUserAccess() == 1): ?>
+        <button type="button" class="btn btn-secondary" onclick="location.href='<?= $link->url("user.index") ?>'">Return</button>
+    <?php endif; ?>
 </form>
