@@ -16,10 +16,11 @@ class UserController extends AControllerBase
         switch ($action) {
             case 'index':
             case 'add':
-            case 'delete':
-            case 'save':
-            case 'edit':
                 return $this->app->getAuth()->isLogged() && $this->app->getAuth()->getUserAccess() == 1;
+            case 'edit':
+            case 'save':
+            case 'delete':
+                return $this->app->getAuth()->isLogged();
             case 'register':
                 return !$this->app->getAuth()->isLogged();
             default:

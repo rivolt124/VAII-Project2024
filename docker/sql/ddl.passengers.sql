@@ -16,9 +16,3 @@ CREATE TABLE `passengers`
     CONSTRAINT `fk_email` FOREIGN KEY (`email`) REFERENCES `users` (`email`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
-
-
-INSERT INTO `passengers` (`PASSPORT_ID`, `email`)
-VALUES
-    (12345, 'user1@gmail.com'),
-    (67890, 'user2@gmail.com');
