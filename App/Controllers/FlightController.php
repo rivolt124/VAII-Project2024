@@ -132,17 +132,18 @@ class FlightController extends AControllerBase
         $request = $this->request();
         if ($request->isContentTypeJSON())
         {
-            $data = $request->getPost();
-
-            $flights = Flight::getAll();
-            $result = [];
-            foreach ($flights as $flight)
-                if (stripos($flight->getOrigin(), $data['query']) !== false || stripos($flight->getDestination(), $data['query']) !== false)
-                    $result[] = $flight;
+            $data = $request->getRawBodyJSON();
+            if (isset($data->query))
+            {
+                $flights = Flight::getAll();
+                $result = [];
+                foreach ($flights as $flight)
+                    if (stripos($flight->getOrigin(), $data->query) !== false || stripos($flight->getDestination(), $data->query) !== false)
+                        $result[] = $flight;
+            }
         }
 
         return new JsonResponse(['flights' => $result]);
-
     }
 
 }

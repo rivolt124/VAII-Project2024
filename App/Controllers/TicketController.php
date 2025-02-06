@@ -48,35 +48,15 @@ class TicketController extends AControllerBase
         $id = (int) $this->request()->getValue('id');
         $ticket = Ticket::getOne($id);
         $passenger = User::getOne($ticket->getPassengerId());
+        $departureDate = Schedule::getAll('`flight_number` LIKE ?', [$ticket->getFlightNumber()], limit: 1);
 
         if (is_null($ticket)) {
             throw new HTTPException(404);
         } else {
-
-            $content = <<<HTML
-                <!DOCTYPE html>
-                <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Flight Ticket</title>
-                    <style>
-                        body { font-family: Arial, sans-serif; padding: 20px; }
-                        .ticket { border: 2px dashed #000; padding: 20px; max-width: 400px; text-align: center; }
-                        .ticket h2 { margin: 0 0 10px; }
-                        .ticket p { margin: 5px 0; }
-                    </style>
-                </head>
-                <body>
-                    <div class="ticket">
-                        <h2>Flight Ticket</h2>
-                        <p><strong>Ticket Number:</strong> {$ticket->getTicketNumber()}</p>
-                        <p><strong>Flight Number:</strong> {$ticket->getFlightNumber()}</p>
-                        <p><strong>Passenger:</strong> {$passenger->getName()}</p>
-                    </div>
-                </body>
-                </html>
-                HTML;
+            // Include the template and pass the ticket and passenger objects
+            ob_start(); // Start output buffering
+            include 'public/php/ticket_template.php';
+            $content = ob_get_clean(); // Get the buffered content
 
             header('Content-Type: text/html');
             header('Content-Disposition: attachment; filename="ticket_' . $ticket->getTicketNumber() . '.html"');
@@ -85,8 +65,6 @@ class TicketController extends AControllerBase
             exit;
         }
     }
-
-
 
     public function delete()
     {
