@@ -116,7 +116,10 @@ class AirplaneController extends AControllerBase
         $airplanes = Airplane::getAll();
         foreach ($airplanes as $airplane)
             if ($airplane->getRegistration() == $this->request()->getValue('registration'))
-                $errors[] = "Lietadlo uz je registrovane!";
+            {
+                if ($airplane->getId() != $this->request()->getValue('id'))
+                    $errors[] = "Lietadlo uz je registrovane!";
+            }
 
         return $errors;
     }
