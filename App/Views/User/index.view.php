@@ -26,7 +26,7 @@
                         <h5 class="card-title"><?= $user->getName() ?></h5>
                         <p class="card-text">
                             <strong>Email:</strong> <?= $user->getEmail() ?><br>
-                            <strong>Password:</strong> <?= $user->getPassword() ?><br>
+
                         </p>
                         <div class="d-flex justify-content-center gap-2">
                             <a href="<?= $link->url('user.edit', ['id' => $user->getId()]) ?>" class="btn btn-primary btn-sm border-0">Edit</a>

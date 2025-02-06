@@ -113,7 +113,6 @@ class UserController extends AControllerBase
     {
         $id = (int) $this->request()->getValue('id');
         $user = User::getOne($id);
-        $access = $user->getAccess();
 
         if (is_null($user) ||$user->getAccess() == 1) {
             throw new HTTPException(404);
@@ -123,7 +122,7 @@ class UserController extends AControllerBase
                $auth->logout();
             FileStorage::deleteFile($user->getId());
             $user->delete();
-            if ($access == 1)
+            if ($auth->isLogged())
                 return new RedirectResponse($this->url("user.index"));
             else
                 return new RedirectResponse($this->url("home.index"));
