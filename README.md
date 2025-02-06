@@ -11,7 +11,7 @@ Na použitie webovej aplikácie je potrebené mať Docker [Docker Desktop](https
 ## 2. Spustenie 
 1. Spustenie Dockeru.
 2. Otvorenie a spustenie súboru ```docker-compose.yml```.
-3. Po úspešnom spustení by sa mali v Dockery v sekcii Containers objaviť položka [vymazal_project]:
+3. Po úspešnom spustení by sa mali v Dockery v sekcii Containers objaviť položka  ```vymazal_project ```:
     - adminer-1 - spravovanie databázy
     - db-1 - databáza
     - web-1 - stránka
